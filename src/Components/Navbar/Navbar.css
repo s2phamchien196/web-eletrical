@@ -1,0 +1,29 @@
+full-height-box {
+  display: flex;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+}
+
+flex-vbox {
+  display: flex;
+  flex-direction: column ! important;
+  flex-grow: 1;
+}
+
+flex-vbox-grow-0 {
+  display: flex;
+  flex-direction: column ! important;
+  flex-grow: 0;
+}
+
+flex-hbox {
+  display: flex;
+  flex-direction: row ! important;
+  flex-grow: 1;
+}
+
+flex-hbox-grow-0 {
+  display: flex;
+  flex-direction: row ! important;
+  flex-grow: 0;
+}
