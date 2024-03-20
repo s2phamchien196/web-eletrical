@@ -1,0 +1,13 @@
+.footer {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 0 140px;
+  margin-bottom: 150px;
+  background-color: cadetblue;
+  gap: 30px;
+}

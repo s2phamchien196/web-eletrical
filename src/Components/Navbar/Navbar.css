@@ -1,29 +1,87 @@
-full-height-box {
+.navbar {
   display: flex;
-  flex-direction: column !important;
-  flex-grow: 1 !important;
+  justify-content: space-around;
+  padding: 5px;
+  box-shadow: 0 1px 3px -2 black;
 }
 
-flex-vbox {
+.nav-logo {
   display: flex;
-  flex-direction: column ! important;
-  flex-grow: 1;
+  align-items: center;
+  gap: 10px;
 }
 
-flex-vbox-grow-0 {
+/* .nav-logo div {
+  color: #171717;
+  font-size: 38px;
+  font-weight: 600;
+} */
+
+.nav-menu {
   display: flex;
-  flex-direction: column ! important;
-  flex-grow: 0;
+  align-items: center;
+  gap: 50px;
+  list-style: none;
+  color: #626262;
+  font-size: 15px;
+  font-weight: 500px;
 }
 
-flex-hbox {
+.nav-menu li {
   display: flex;
-  flex-direction: row ! important;
-  flex-grow: 1;
+  flex-direction: column;
+  color: #626262;
+  gap: 3px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
-flex-hbox-grow-0 {
+.nav-menu hr {
+  border: none;
+  width: 90%;
+  height: 3px;
+  border-radius: 10px;
+  background: #FF4141;
+  margin-top: 2px;
+}
+
+.nav-cart {
   display: flex;
-  flex-direction: row ! important;
-  flex-grow: 0;
+  align-items: center;
+  gap: 45px;
+  margin-left: 50px;
+  margin-right: 40px;
+}
+
+.nav-cart-count {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -20px;
+  margin-left: -55px;
+  border-radius: 11px;
+  font-size: 14px;
+  background: red;
+  color: white;
+}
+
+.search {
+  width: calc(40% + 120px);
+  height: 35px;
+  border: none;
+  outline: none;
+  color: #616161;
+  font-size: 16px;
+  border-radius: 80px;
+  padding-left: 10px;
+}
+
+.banner {
+  background: linear-gradient(180deg, #91b0ee, #27b59222 60%);
+}
+
+.name-shop {
+  color: linear-gradient(180deg, #91b0ee, #27b59222 60%);
 }

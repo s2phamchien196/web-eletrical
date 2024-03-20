@@ -1,0 +1,5 @@
+.home-page {
+  height: 100vh;
+  background: linear-gradient(180deg, #b0caff, #e1ffea22 60%);
+  display: flex;
+}
