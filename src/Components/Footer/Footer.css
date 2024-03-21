@@ -1,13 +1,24 @@
 .footer {
-  width: 100%;
+  padding: 50px;
   height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  padding: 0 140px;
-  margin-bottom: 150px;
+  display: grid;
+  justify-content: start;
+  align-items: start;
+  text-align: start;
+  grid-template-columns: 1.5fr 1fr 1fr;
   background-color: cadetblue;
   gap: 30px;
+  color: antiquewhite;
+}
+
+.shop-address span {
+  color: gold;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.shop-address {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
