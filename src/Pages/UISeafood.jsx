@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import Popular from "../Components/Popular/Popular";
-import Footer from "../Components/Footer/Footer";
-import BestSale from "../Components/BestSale/BestSale";
+import { UISale } from "../Components/Sale/UISale";
+import { UIBanner } from "../Components/Banner/Banner";
 
 export class UISeafoodMain extends Component {
   render() {
+    let { onModify } = this.props;
     return (
       <div>
-        <Popular />
-        <BestSale />
-        <Footer />
+        <UIBanner />
+        <UISale />
+        <Popular onModify={onModify} />
       </div>
     )
   }

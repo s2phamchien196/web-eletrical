@@ -1,13 +1,37 @@
 .item {
-  width: 250px;
+  font-size: 18px;
+  text-align: start;
+  width: 215px;
 }
 
 .item p {
+  padding-top: 10px;
   margin: 6px, 0;
 }
 
 .item img {
-  width: 200px;
+  width: 205px;
+  height: 250px;
+}
+
+.content {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+  justify-self: start;
+  height: 50px;
+}
+
+.sale {
+  width: 60px;
+  height: 22px;
+  background-color: rgb(255, 84, 84);
+  border: none;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  padding-top: 2px;
+  margin-top: 10px;
 }
 
 .item-prices {
@@ -15,10 +39,29 @@
   gap: 20px;
 }
 
+.item-prices img {
+  width: 20px;
+  height: 20px;
+}
+
+.cart-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(236, 136, 43);
+  border: none;
+}
+
 .item-price-new {
-  color: #374151;
-  font-size: 18px;
-  font-weight: 600;
+  color: #3c7eea;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.item-price-new span {
+  color: rgba(85, 85, 85, 0.838);
+  font-size: 12px;
+  font-weight: normal;
 }
 
 .item-price-old {
@@ -31,4 +74,18 @@
 .item:hover {
   transform: scale(1.05);
   transition: 0.6s;
+}
+
+.item-cart-count {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -30px;
+  margin-right: 10px;
+  border-radius: 11px;
+  font-size: 14px;
+  background: red;
+  color: white;
 }

@@ -2,13 +2,16 @@
   padding: 50px;
   height: 400px;
   display: grid;
-  justify-content: start;
+  justify-content: end;
   align-items: start;
   text-align: start;
   grid-template-columns: 1.5fr 1fr 1fr;
   background-color: cadetblue;
   gap: 30px;
   color: antiquewhite;
+  margin-top: 30px;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .shop-address span {
@@ -21,4 +24,17 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.footer a {
+  display: flex;
+  color: antiquewhite;
+  padding-top: 10px;
+}
+
+.policy-hr {
+  width: 100px;
+  height: 5px;
+  border-radius: 20px;
+  background: #5b5b5b;
 }

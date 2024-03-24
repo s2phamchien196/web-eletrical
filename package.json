@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "component": "^1.1.0",
     "feather-icons-react": "^0.7.0",
+    "jquery": "^3.7.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
