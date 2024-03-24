@@ -1,0 +1,98 @@
+.sale-items {
+  width: 1200px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 242, 232)
+}
+
+.sale-flash {
+  display: flex;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: start;
+  height: 60px;
+  color: rgb(242, 54, 17);
+  background: rgb(255, 214, 186)
+}
+
+.sale-flash img {
+  height: 60px;
+  width: 135px;
+}
+
+.sale-flash p {
+  text-align: center;
+  font-size: 15px;
+  align-items: center;
+}
+
+.container {
+  width: 1200px;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  flex-shrink: 0;
+  scroll-behavior: smooth;
+  position: relative;
+  gap: 30px;
+}
+
+.item {
+  margin-top: 20px;
+  scroll-snap-align: start;
+  z-index: 5;
+}
+
+.scroll-button {
+  margin-top: 150px;
+}
+
+.button {
+  position: absolute;
+  padding: 0.5em;
+  border: none;
+  height: 50px;
+  width: 25px;
+  margin-left: 10px;
+  z-index: 10;
+  background-color: rgba(226, 225, 225, 0.601);
+}
+
+.button-right {
+  margin-left: -35px;
+}
+
+.button i {
+  font-size: 30px;
+  color: rgba(171, 59, 59, 0.867);
+}
+
+.countdown {
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  gap: 5px;
+}
+
+.countdown div {
+  color: #ffffff;
+  background: rgb(242, 54, 17);
+  width: 50px;
+  text-align: center;
+  text-wrap: wrap;
+  text-align: center;
+  padding: 5px;
+  font-size: 15px;
+  line-height: 18px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.countdown p {
+  margin-top: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
