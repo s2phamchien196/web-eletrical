@@ -16,9 +16,9 @@
 
 .content {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   gap: 20px;
-  justify-self: start;
+  justify-self: flex-start;
   height: 50px;
 }
 

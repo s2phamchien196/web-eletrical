@@ -8,7 +8,7 @@ export const Popular = (props) => {
   return (
     <div className='popular-body'>
       <div className='popular'>
-        <h4>Hải Sản Bán Chạy</h4>
+        <h4 className='px-2'>Hải Sản Bán Chạy</h4>
         <div className='popular-item'>
           {data_best_sale.map((item, index) => {
             return (

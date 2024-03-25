@@ -1,9 +1,8 @@
-body {
+/* .list-menu {
   margin: 0;
   padding: 0;
-  font: 300 14px/18px Roboto;
-}
-
+  font: 300 30px Roboto;
+} */
 
 *,
 :after,
@@ -45,6 +44,7 @@ a:focus {
   position: relative;
   background: #4981c2;
   text-align: start;
+  /* font-size: 2px; */
   padding-left: 50px;
 }
 
@@ -56,7 +56,6 @@ a:focus {
   color: #ffffff;
   text-decoration: none;
   font-weight: 400;
-  /* text-transform: capitalize; */
   border-right: 1px #486c89 dotted;
   -webkit-transition: color 0.2s linear, background 0.2s linear;
   -moz-transition: color 0.2s linear, background 0.2s linear;
@@ -93,7 +92,7 @@ li.drop-down:before {
   position: absolute;
   right: 6px;
   top: 20px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 li.drop-down>ul {
@@ -151,7 +150,7 @@ li.drop-down>ul>li>a,
 h4.row.mega-title {
   color: #eee;
   margin-top: 0px;
-  font-size: 14px;
+  font-size: 18px;
   padding-left: 15px;
   padding-bottom: 13px;
   text-transform: uppercase;

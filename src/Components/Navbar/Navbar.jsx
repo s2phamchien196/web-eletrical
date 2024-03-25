@@ -30,10 +30,10 @@ export class NavbarComponent extends Component {
           <div className="nav-logo">
             <img src={seafood} style={{ height: 60, width: 60 }} alt="" />
             <div className="flex-vbox">
-              <div className="flex-hbox" style={{ fontFamily: 'fantasy', marginTop: 15 }}>
+              <div className="flex-hbox" style={{ marginTop: 15 }}>
                 <h5 className="px-1 name-shop">{bean.shopName}</h5>
               </div>
-              <div style={{ color: 'green', fontStyle: 'italic', fontFamily: 'fantasy', fontSize: 15 }}>{bean.shopDescription}</div>
+              <div style={{ color: 'green', fontStyle: 'italic', fontSize: 15 }}>{bean.shopDescription}</div>
             </div>
           </div>
           <div className="nav-cart flex-grow-1 ">

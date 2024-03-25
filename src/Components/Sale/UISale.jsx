@@ -8,8 +8,9 @@ import flash_sale_img from '../Assets/flash-sale.jpg'
 export class UISale extends Component {
   TIMEOUT = 6000;
   intervalId;
+  index = 0;
   componentDidMount() {
-    this.intervalId = setInterval(() => this.handleScroll(300 + 20), this.TIMEOUT);
+    this.intervalId = setInterval(() => this.scrollToLeft(240), this.TIMEOUT);
   }
 
   scrollContainerRef;
@@ -18,18 +19,41 @@ export class UISale extends Component {
     this.scrollContainerRef = React.createRef();
   }
 
-  handleScroll = (val) => {
+  scrollToLeft = (val) => {
     const scrollContainer = this.scrollContainerRef.current;
-    if (!scrollContainer) return;
-    if (scrollContainer.scrollLeft + scrollContainer.clientWidth + 120 >= scrollContainer.scrollWidth) {
-      scrollContainer.scrollLeft = 0;
+    if (!scrollContainer || this.index % 2 !== 0) {
+      this.index++;
+      return;
+    }
+    this.index++;
+    if (scrollContainer.scrollLeft + scrollContainer.clientWidth < scrollContainer.scrollWidth) {
+      const currentScrollPosition = scrollContainer.scrollLeft;
+      const targetScrollPosition = currentScrollPosition + val;
+      scrollContainer.scrollTo({
+        left: targetScrollPosition,
+        behavior: 'smooth'
+      });
     } else {
-      scrollContainer.scrollLeft += val;
-      scrollContainer.scrollBehavior = 'smooth';
+      scrollContainer.scrollLeft = 0;
+      this.index = 0;
     }
     this.forceUpdate();
   };
 
+  scrollToRight = (val) => {
+    const scrollContainer = this.scrollContainerRef.current;
+    if (!scrollContainer) return;
+    if (scrollContainer.scrollLeft === 0) {
+      scrollContainer.scrollLeft = scrollContainer.scrollWidth;
+    } else {
+      const currentScrollPosition = scrollContainer.scrollLeft;
+      const targetScrollPosition = currentScrollPosition - val;
+      scrollContainer.scrollTo({
+        left: targetScrollPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   render() {
     let { onModify } = this.props;
@@ -45,7 +69,7 @@ export class UISale extends Component {
           </div>
           <div className='flex-hbox'>
             <div className='scroll-button'>
-              <button className='button' onClick={() => this.handleScroll(-(250 + 20))}>
+              <button className='button' onClick={() => this.scrollToRight(250 + 20)}>
                 <i class="fa fa-angle-left"></i>
               </button>
             </div>
@@ -62,7 +86,7 @@ export class UISale extends Component {
               })}
             </div>
             <div className='scroll-button'>
-              <button className='button button-right' onClick={() => this.handleScroll(250 + 20)}> <i class="fa fa-angle-right"></i></button>
+              <button className='button button-right' onClick={() => this.scrollToLeft(250 + 20)}> <i class="fa fa-angle-right"></i></button>
             </div>
           </div>
         </div>
