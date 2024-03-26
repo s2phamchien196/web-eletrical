@@ -1,7 +1,9 @@
 .item {
   font-size: 18px;
   text-align: start;
-  width: 215px;
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .item p {
@@ -10,7 +12,7 @@
 }
 
 .item img {
-  width: 205px;
+  width: 200px;
   height: 250px;
 }
 

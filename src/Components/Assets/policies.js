@@ -33,7 +33,6 @@ const policy = {
   policy3: {
     path: 'chinh-sach-giao-nhan-hang',
     label: 'Chính sách giao/nhận hàng',
-    note: "",
     note: <div className="text-wrap text-start" style={{ padding: 100, paddingTop: 20, fontSize: 15 }}>
       <h6>1. Các phương thức giao hàng</h6>
       Chúng tôi sử dụng phương thức giao hàng:

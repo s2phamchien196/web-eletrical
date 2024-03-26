@@ -57,12 +57,15 @@ export class UISale extends Component {
 
   render() {
     let { onModify } = this.props;
+    let currentWidth = window.innerWidth;
+    let flashContent = <p className='py-4 px-3'>Kết Thúc Trong</p>;
+    if (currentWidth < 700) flashContent = null;
     return (
       <div className='flex-vbox' style={{ justifyContent: 'center', alignItems: 'center' }}>
         <div className='sale-items'>
           <div className='sale-flash'>
             <img src={flash_sale_img} alt='' />
-            <p className='py-4 px-3'>{'Kết Thúc Trong'}</p>
+            {flashContent}
             <div>
               <UICountDown />
             </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Popular from "../Components/Popular/Popular";
 import { UISale } from "../Components/Sale/UISale";
 import { UIBanner } from "../Components/Banner/Banner";
+import { Popular } from "../Components/Popular/Popular";
 
 export class UISeafoodMain extends Component {
   render() {
