@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import './Item.css'
 import cart_icon from '../Assets/cart_icon.png'
 import info_data from '../Assets/info_data'
+import { Link } from "react-router-dom";
 
 export class UIItems extends Component {
   render() {
     let { item, onModify } = this.props;
-    let fistPrice = item.price[0];
+    let fistPrice = { newPrice: 0, oldPrice: 0 };
+    if (item.price) fistPrice = item.price[0];
     let sale = (fistPrice['oldPrice'] - fistPrice['newPrice']) / fistPrice['oldPrice'] * 100;
     sale = Math.round(sale);
     let userBuy = info_data.userBuy;
@@ -21,7 +23,9 @@ export class UIItems extends Component {
     }
     return (
       <div className={'item'}>
-        <img src={item.path} alt="" />
+        <Link to={`/product/${item.id}`} >
+          <img src={item.path} alt="" />
+        </Link>
         <div className="content">
           <p className="flex-grow-1">{item.label}</p>
           <div className="sale flex-grow-0 mx-2">

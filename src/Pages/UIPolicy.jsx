@@ -1,5 +1,4 @@
 import React from 'react'
-import './stylecss.css'
 
 const UIPolicy = (props) => {
   let { policy } = props;

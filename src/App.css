@@ -75,3 +75,21 @@ body {
   padding: 0;
   font: 300 14px/18px Roboto;
 }
+
+@media screen and (min-width: 768px) {
+  .main {
+    width: 748px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .main {
+    width: 1000px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .main {
+    width: 1240px;
+  }
+}

@@ -11,6 +11,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UISeafoodMain } from './Pages/UISeafood';
 import { UIProduct } from './Pages/UIProduct';
 import { UICart } from './Pages/UICart';
+import ShopCategory from "./Pages/ShopCategory";
+
+import banner_mens from './Components/Assets/banner_mens.png'
+import banner_women from './Components/Assets/banner_women.png'
 
 const renderRoutePolicy = () => {
   let policyContents = [];
@@ -29,12 +33,14 @@ export class App extends Component {
     return (
       <div className="App body flex-vbox" style={{ height: '100vh' }}>
         <div className='flex-grow-1'>
-          <BrowserRouter>
+          <BrowserRouter className='main'>
             <NavbarComponent />
             <Routes>
               <Route path='/' element={<UISeafoodMain onModify={() => this.forceUpdate()} />}></Route>
               {renderRoutePolicy()}
-              <Route path='/shop' element={<UISeafoodMain />}></Route>
+              <Route path='/hai-san-ban-chay' element={<ShopCategory banner={banner_mens} category={'Hải Sản Bán Chạy'} />}></Route>
+              <Route path='/ngao-so-oc' element={<ShopCategory banner={banner_women} category={'Ngao,Sò,Ốc'} />}></Route>
+
               <Route path='/truyen-hinh' element={<UITv />}></Route>
               <Route path='/bao-tri' element={<UINews />}></Route>
               <Route path='/phan-hoi' element={<UIFeedback />}></Route>

@@ -30,14 +30,6 @@
 }
 
 .popular-items {
-  border: 2px solid #eaeaea;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-
-.popular-items {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   border: 2px solid #eaeaea;
@@ -46,8 +38,6 @@
 @media screen and (min-width: 768px) {
   .popular-items {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    display: grid;
-    border: 2px solid #eaeaea;
   }
 
   .popular {
@@ -58,8 +48,6 @@
 @media screen and (min-width: 1024px) {
   .popular-items {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    display: grid;
-    border: 2px solid #eaeaea;
   }
 
   .popular {
@@ -70,8 +58,6 @@
 @media screen and (min-width: 1280px) {
   .popular-items {
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    display: grid;
-    border: 2px solid #eaeaea;
   }
 
   .popular {

@@ -13,14 +13,14 @@ const seafood = {
   },
   menu: [
     {
-      name: 'oneSun',
-      label: 'Hải Sản 1 Nắng',
-      link: "/one-sun"
+      name: 'hai-san-ban-chay',
+      label: 'Hải Sản Bán Chạy',
+      link: "/hai-san-ban-chay"
     },
     {
-      name: 'freshSeafood',
-      label: 'Hải Sản Tươi',
-      link: "/fresh-seafood"
+      name: 'ngao-so-oc',
+      label: 'Ngao,Sò,Ốc',
+      link: "/ngao-so-oc"
     },
     {
       name: 'driedSeafood',
