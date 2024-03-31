@@ -1,18 +1,50 @@
 
 import React, { Component } from 'react'
 import './Banner.css'
-import basket_data from '../Assets/basket/data';
+import all_product from '../Assets/all_product';
+const currentPath = window.location.origin;
 
 export class UIBanner extends Component {
+  DIR = '../Assets/image';
   TIMEOUT = 1000;
+  data = [];
+  imageList = [];
   bean = {
     index: 1,
     maxReturn: 4,
   }
   intervalId;
 
+  constructor() {
+    super([]);
+    all_product.forEach(sel => {
+      if (sel.banner === true) {
+        this.data.push(sel);
+      }
+    });
+    const imageFiles = require.context('../Assets/image', false, /\.(png|jpe?g|svg)$/);
+    imageFiles.keys().forEach(imagePath => {
+      if (String(imagePath).startsWith('.')) imagePath = imagePath.substring(1);
+      this.imageList.push(imagePath);
+    });
+  }
+
   componentDidMount = () => {
     this.intervalId = setInterval(this.handleNext, 10000);
+  }
+
+  getImage(name) {
+    console.log(currentPath);
+    // const relativePath = '../Assets/image/tom-hum-alaska-1.png';
+    // const absolutePath = path.resolve(__dirname, relativePath);
+    // console.log('Đường dẫn tuyệt đối:', absolutePath);
+    let file = '/Users/admin/makemoney/web-seafood/src/Components/Assets/image/tom-hum-alaska-3.png';
+
+    for (let imagePath of this.imageList) {
+      if (imagePath.includes(name)) {
+        return `%PUBLIC_URL%${this.DIR}${imagePath}`;
+      }
+    }
   }
 
   handleNext = () => {
@@ -29,16 +61,20 @@ export class UIBanner extends Component {
   };
 
   renderSlideItems = () => {
+    let file = '/Users/admin/makemoney/web-seafood/src/Components/Assets/image/tom-hum-alaska-3.png';
+
     let contents = [];
-    for (let index = 0; index < basket_data.length; index++) {
-      let sel = basket_data[index];
+    for (let index = 0; index < this.data.length; index++) {
+      let sel = this.data[index];
+      let group = sel['nhom-hang'];
+      let img = this.getImage(group);
       contents.push(
         <div className={`slider slide-${index + 1}`}>
-          <img src={sel.path} alt="" />
+          <img src={`${file}`} alt="" />
           <div className="slider-content">
             <h4>Bán Chạy</h4>
-            <h2>{sel.label}</h2>
-            <button type="button" className="buy-now-btn" name="button">{sel.note}</button>
+            <h2>{sel['ten-hang']}</h2>
+            <button type="button" className="buy-now-btn" name="button">{sel['mo-ta']}</button>
           </div>
           <div className="number-pagination">
             <span>{index + 1}</span>

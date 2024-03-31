@@ -6,6 +6,44 @@ import data_best_sale from '../Assets/basket/data';
 import flash_sale_img from '../Assets/flash-sale.jpg'
 
 export class UISale extends Component {
+  render() {
+    let { onModify } = this.props;
+    let currentWidth = window.innerWidth;
+    let flashContent = <p className='py-4 px-3'>Kết Thúc Trong</p>;
+    if (currentWidth < 700) flashContent = null;
+    return (
+      <div className='flex-vbox' style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <div className='sale-items'>
+          <div className='sale-flash'>
+            <img src={flash_sale_img} alt='' />
+            {flashContent}
+            <div>
+              <UICountDown />
+            </div>
+          </div>
+          <ScrollItems scrollSize={250 + 20} renderItems={() => {
+            return (
+              <div className='flex-hbox' style={{ gap: 20 }}>
+                {data_best_sale.map((item, index) => {
+                  return (
+                    <UIItems key={index} id={item.id} item={item} onModify={onModify} />
+                  )
+                })}
+                {data_best_sale.map((item, index) => {
+                  return (
+                    <UIItems key={index} id={item.id} item={item} onModify={onModify} />
+                  )
+                })}
+              </div>
+            )
+          }} />
+        </div>
+      </div>
+    )
+  }
+}
+
+export class ScrollItems extends Component {
   TIMEOUT = 6000;
   intervalId;
   index = 0;
@@ -56,42 +94,19 @@ export class UISale extends Component {
   };
 
   render() {
-    let { onModify } = this.props;
-    let currentWidth = window.innerWidth;
-    let flashContent = <p className='py-4 px-3'>Kết Thúc Trong</p>;
-    if (currentWidth < 700) flashContent = null;
+    let { renderItems, scrollSize } = this.props;
     return (
-      <div className='flex-vbox' style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <div className='sale-items'>
-          <div className='sale-flash'>
-            <img src={flash_sale_img} alt='' />
-            {flashContent}
-            <div>
-              <UICountDown />
-            </div>
-          </div>
-          <div className='flex-hbox'>
-            <div className='scroll-button'>
-              <button className='button' onClick={() => this.scrollToRight(250 + 20)}>
-                <i class="fa fa-angle-left"></i>
-              </button>
-            </div>
-            <div ref={this.scrollContainerRef} className='container flex-grow-1'>
-              {data_best_sale.map((item, index) => {
-                return (
-                  <UIItems key={index} id={item.id} item={item} onModify={onModify} />
-                )
-              })}
-              {data_best_sale.map((item, index) => {
-                return (
-                  <UIItems key={index} id={item.id} item={item} onModify={onModify} />
-                )
-              })}
-            </div>
-            <div className='scroll-button'>
-              <button className='button button-right' onClick={() => this.scrollToLeft(250 + 20)}> <i class="fa fa-angle-right"></i></button>
-            </div>
-          </div>
+      <div className='flex-hbox'>
+        <div className='scroll-button'>
+          <button className='button' onClick={() => this.scrollToRight(scrollSize)}>
+            <i class="fa fa-angle-left"></i>
+          </button>
+        </div>
+        <div ref={this.scrollContainerRef} className='container flex-grow-1'>
+          {renderItems()}
+        </div>
+        <div className='scroll-button'>
+          <button className='button button-right' onClick={() => this.scrollToLeft(scrollSize)}> <i class="fa fa-angle-right"></i></button>
         </div>
       </div>
     )
