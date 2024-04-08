@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-// import UIItems from '../Item/UIItems'
 import './Sale.css'
 import { UIItems } from '../Item/UIItems';
-import data_best_sale from '../Assets/basket/data';
+import all_product from '../Assets/all_product';
 import flash_sale_img from '../Assets/flash-sale.jpg'
 
 export class UISale extends Component {
   render() {
     let { onModify } = this.props;
+    let data_best_sale = all_product.filter(sel => sel.sale);
     let currentWidth = window.innerWidth;
     let flashContent = <p className='py-4 px-3'>Kết Thúc Trong</p>;
     if (currentWidth < 700) flashContent = null;
@@ -21,17 +21,12 @@ export class UISale extends Component {
               <UICountDown />
             </div>
           </div>
-          <ScrollItems scrollSize={250 + 20} renderItems={() => {
+          <ScrollItems scrollSize={220} renderItems={() => {
             return (
               <div className='flex-hbox' style={{ gap: 20 }}>
                 {data_best_sale.map((item, index) => {
                   return (
-                    <UIItems key={index} id={item.id} item={item} onModify={onModify} />
-                  )
-                })}
-                {data_best_sale.map((item, index) => {
-                  return (
-                    <UIItems key={index} id={item.id} item={item} onModify={onModify} />
+                    <UIItems key={index} id={item['ma-hang']} item={item} onModify={onModify} />
                   )
                 })}
               </div>
@@ -48,7 +43,8 @@ export class ScrollItems extends Component {
   intervalId;
   index = 0;
   componentDidMount() {
-    this.intervalId = setInterval(() => this.scrollToLeft(240), this.TIMEOUT);
+    let { scrollSize } = this.props;
+    this.intervalId = setInterval(() => this.scrollToLeft(scrollSize), this.TIMEOUT);
   }
 
   scrollContainerRef;

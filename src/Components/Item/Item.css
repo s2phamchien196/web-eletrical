@@ -14,6 +14,7 @@
 .item img {
   width: 200px;
   height: 250px;
+  box-shadow: 0px 4px 8px rgba(32, 32, 32, 0.3)
 }
 
 .content {
@@ -21,19 +22,17 @@
   align-items: flex-start;
   gap: 20px;
   justify-self: flex-start;
-  height: 50px;
+  height: 60px;
 }
 
 .sale {
-  width: 60px;
-  height: 22px;
-  background-color: rgb(255, 84, 84);
+  width: 50px;
+  height: 18px;
+  background-color: rgb(255, 233, 112);
   border: none;
-  color: white;
+  color: rgb(203, 69, 43);
   font-size: 15px;
   text-align: center;
-  padding-top: 2px;
-  margin-top: 10px;
 }
 
 .item-prices {
@@ -55,9 +54,10 @@
 }
 
 .item-price-new {
-  color: #3c7eea;
-  font-size: 22px;
+  color: rgb(226, 109, 86);
+  font-size: 20px;
   font-weight: 500;
+  margin-top: 10px;
 }
 
 .item-price-new span {
@@ -67,7 +67,7 @@
 }
 
 .item-price-old {
-  color: #8c8c8c;
+  color: rgba(0, 0, 0, 0.26);
   font-size: 18px;
   font-weight: 500;
   text-decoration: line-through;
@@ -84,7 +84,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: -30px;
+  margin-left: -35px;
+  margin-top: -10spx;
   margin-right: 10px;
   border-radius: 11px;
   font-size: 14px;

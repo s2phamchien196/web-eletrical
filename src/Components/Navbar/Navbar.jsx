@@ -5,7 +5,7 @@ import whatsapp_icon from '../Assets/whatsapp_icon.png';
 import './Navbar.css';
 import { Link } from "react-router-dom";
 import List from "./List";
-import info_data from '../Assets/info_data'
+import info_data from '../Assets/info_data';
 
 export class NavbarComponent extends Component {
   param = {

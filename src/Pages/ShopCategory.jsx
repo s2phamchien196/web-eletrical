@@ -19,12 +19,13 @@ const ShopCategory = (props) => {
       </div>
       <div className="shopcategory-products">
         {all_product.map((item, index) => {
-          if (item.category === props.category) {
+          if (item && item.category === props.category) {
             return (
               <UIItems key={index} id={item.id} item={item} onModify={props.onModify} />
             )
           }
-        })}
+        }
+        )}
       </div>
     </div>
   )

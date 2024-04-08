@@ -1,0 +1,8 @@
+.main {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}

@@ -2,11 +2,9 @@
 import React, { Component } from 'react'
 import './Banner.css'
 import all_product from '../Assets/all_product';
-const currentPath = window.location.origin;
 
 export class UIBanner extends Component {
-  DIR = '../Assets/image';
-  TIMEOUT = 1000;
+  TIMEOUT = 700;
   data = [];
   imageList = [];
   bean = {
@@ -22,29 +20,10 @@ export class UIBanner extends Component {
         this.data.push(sel);
       }
     });
-    const imageFiles = require.context('../Assets/image', false, /\.(png|jpe?g|svg)$/);
-    imageFiles.keys().forEach(imagePath => {
-      if (String(imagePath).startsWith('.')) imagePath = imagePath.substring(1);
-      this.imageList.push(imagePath);
-    });
   }
 
   componentDidMount = () => {
     this.intervalId = setInterval(this.handleNext, 10000);
-  }
-
-  getImage(name) {
-    console.log(currentPath);
-    // const relativePath = '../Assets/image/tom-hum-alaska-1.png';
-    // const absolutePath = path.resolve(__dirname, relativePath);
-    // console.log('Đường dẫn tuyệt đối:', absolutePath);
-    let file = '/Users/admin/makemoney/web-seafood/src/Components/Assets/image/tom-hum-alaska-3.png';
-
-    for (let imagePath of this.imageList) {
-      if (imagePath.includes(name)) {
-        return `%PUBLIC_URL%${this.DIR}${imagePath}`;
-      }
-    }
   }
 
   handleNext = () => {
@@ -61,16 +40,15 @@ export class UIBanner extends Component {
   };
 
   renderSlideItems = () => {
-    let file = '/Users/admin/makemoney/web-seafood/src/Components/Assets/image/tom-hum-alaska-3.png';
-
     let contents = [];
     for (let index = 0; index < this.data.length; index++) {
       let sel = this.data[index];
-      let group = sel['nhom-hang'];
-      let img = this.getImage(group);
+      let images = sel['image'];
+      let image = '';
+      if (images.length > 0) image = images[0];
       contents.push(
         <div className={`slider slide-${index + 1}`}>
-          <img src={`${file}`} alt="" />
+          <img src={image} alt="" />
           <div className="slider-content">
             <h4>Bán Chạy</h4>
             <h2>{sel['ten-hang']}</h2>

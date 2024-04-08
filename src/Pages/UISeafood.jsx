@@ -9,8 +9,8 @@ export class UISeafoodMain extends Component {
     return (
       <div>
         <UIBanner />
-        {/* <UISale onModify={onModify} />
-        <Popular onModify={onModify} /> */}
+        <UISale onModify={onModify} />
+        <Popular onModify={onModify} />
       </div>
     )
   }

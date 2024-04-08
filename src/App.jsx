@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './App.css';
+
 import Footer from './Components/Footer/Footer';
 import UITv from './Pages/UITv';
 import UINews from './Pages/UINews';
@@ -29,7 +30,6 @@ const renderRoutePolicy = () => {
 
 export class App extends Component {
   render() {
-    console.log('Log');
     return (
       <div className="App body flex-vbox" style={{ height: '100vh' }}>
         <div className='flex-grow-1'>

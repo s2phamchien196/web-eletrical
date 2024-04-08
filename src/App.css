@@ -70,10 +70,10 @@
 
 body {
   /* height: 100vh; */
-  font-size: 18px;
+  font-size: 22px;
   margin: 0;
   padding: 0;
-  font: 300 14px/18px Roboto;
+  font: 300 18px Roboto;
 }
 
 @media screen and (min-width: 768px) {
