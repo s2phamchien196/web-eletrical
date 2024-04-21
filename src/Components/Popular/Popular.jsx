@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import './Popular.css'
 import { UIItems } from '../Item/UIItems';
-import all_product from '../Assets/all_product';
-
 export class Popular extends Component {
   renderItems = () => {
-    let { onModify } = this.props;
+    let { onModify, products } = this.props;
     let contents = [];
-    for (let sel of all_product) {
+    for (let sel of products) {
       contents.push(
         <div>
           <UIItems key={sel.id} id={sel.id} item={sel} onModify={onModify} />
@@ -18,10 +16,12 @@ export class Popular extends Component {
   }
 
   render() {
+    let { menuName, filter } = this.props;
     return (
       <div className='popular-body'>
         <div className='popular'>
-          <h4 className='px-2'>Hải Sản Bán Chạy</h4>
+          <h4 className='px-2'>{menuName}  {filter ? <span style={{ fontSize: 15 }}>/ {filter}</span> : <></>}</h4>
+
           <div className='popular-items'>
             {this.renderItems()}
           </div>

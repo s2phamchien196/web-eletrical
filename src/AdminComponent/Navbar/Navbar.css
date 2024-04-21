@@ -1,0 +1,45 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 60px;
+  box-shadow: 0 1px 3px -2px #000;
+  margin-bottom: 1px;
+  background: rgb(255, 255, 255);
+  justify-content: space-between;
+  /* position: ; */
+}
+
+.nav-logo {
+  width: 80px;
+}
+
+.nav-profile {
+  width: 75px;
+}
+
+.login-bnt {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background: #7587eb;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@media(max-width:800px) {
+  .navbar {
+    padding: 15px 30px;
+  }
+
+  .nav-logo {
+    width: 150px;
+  }
+
+  .nav-profile {
+    width: 60px;
+  }
+}

@@ -6,10 +6,9 @@ const Breadcrum = (props) => {
   let { product } = props;
   return (
     <div className='breadcrum'>
-      TRANG CHU <img src={arrow_icon} alt='' />
-      SHOP <img src={arrow_icon} alt='' />
-      {/* {product.category} <img src={arrow_icon} alt='' /> */}
-      {product['ten-hang']}
+      CỬA HÀNG <img src={arrow_icon} alt='' />
+      {product.menu_name} <img src={arrow_icon} alt='' />
+      {product.group}
     </div>
   )
 }

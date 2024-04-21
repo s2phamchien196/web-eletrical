@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import List from "./List";
 import info_data from '../Assets/info_data';
 
+
 export class NavbarComponent extends Component {
   param = {
     search: '',
@@ -19,7 +20,7 @@ export class NavbarComponent extends Component {
 
     const handleKeyDown = (event) => {
       if (event.key === 'Enter') {
-        console.log(this.param.search);
+        window.location.href = `/cua-hang/${this.param.search}`;
       }
     };
     let bean = info_data.bannerInfo;
@@ -31,9 +32,9 @@ export class NavbarComponent extends Component {
             <img src={seafood} style={{ height: 60, width: 60 }} alt="" />
             <div className="flex-vbox">
               <div className="flex-hbox" style={{ marginTop: 15 }}>
-                <h5 className="px-1 name-shop">{bean.shopName}</h5>
+                {/* <h5 className="px-1 name-shop">{bean.shopName}</h5> */}
               </div>
-              <div style={{ color: 'green', fontStyle: 'italic', fontSize: 15 }}>{bean.shopDescription}</div>
+              {/* <div style={{ color: 'green', fontStyle: 'italic', fontSize: 15 }}>{bean.shopDescription}</div> */}
             </div>
           </div>
           <div className="nav-cart flex-grow-1 ">

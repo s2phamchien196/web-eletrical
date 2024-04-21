@@ -1,17 +1,18 @@
-import React, { useContext } from "react";
-import { ShopContext } from "../Context/ShopContext";
+import React, { Component, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Breadcrum from "../Components/Breadcrum/Breadcrum";
 import { UIProductDisplay } from "../Components/ProductDisplay/ProductDisplay";
 import './CSS/style.css'
+import { severGET } from '../Components/AppContext'
 
 export const UIProduct = () => {
-  const { all_product } = useContext(ShopContext);
+  const [product, setProduct] = useState({});
   const { productId } = useParams();
-  const product = all_product.find(sel => sel.id === Number(productId));
+  useEffect(() => {
+    severGET('/product/id', { id: productId }, (data) => setProduct(data));
+  }, []);
   return (
     <div className="main">
-      <Breadcrum product={product} />
       <UIProductDisplay product={product} />
     </div>
   )

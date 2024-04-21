@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './Sale.css'
 import { UIItems } from '../Item/UIItems';
 import all_product from '../Assets/all_product';
-import flash_sale_img from '../Assets/flash-sale.jpg'
 
 export class UISale extends Component {
   render() {
@@ -15,7 +14,7 @@ export class UISale extends Component {
       <div className='flex-vbox' style={{ justifyContent: 'center', alignItems: 'center' }}>
         <div className='sale-items'>
           <div className='sale-flash'>
-            <img src={flash_sale_img} alt='' />
+            <img src={require("../Assets/flash-sale.jpg")} alt='' />
             {flashContent}
             <div>
               <UICountDown />

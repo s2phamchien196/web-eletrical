@@ -1,0 +1,31 @@
+.menu {
+  width: 240px;
+  border: 1px solid #a5a5a5;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 20px;
+}
+
+.menu-header {
+  text-align: start;
+  padding-top: 15px;
+  padding-left: 5px;
+  height: 50px;
+  color: white;
+  background-color: rgb(0, 102, 191);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.menu-items {
+  font-size: 15px;
+  text-align: start;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-weight: 400;
+}
+
+.menu-items li {
+  line-height: 30px;
+  border-bottom: 1px solid #c4c4c4a9;
+}

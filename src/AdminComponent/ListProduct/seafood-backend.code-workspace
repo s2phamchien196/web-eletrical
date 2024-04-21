@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../../../../seafood-backend"
+		},
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../seafood-admin"
+		},
+		{
+			"path": "../../../../web-seafood"
+		}
+	],
+	"settings": {}
+}

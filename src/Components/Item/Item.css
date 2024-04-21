@@ -1,4 +1,6 @@
 .item {
+  margin-top: 10px;
+  margin-bottom: 20px;
   font-size: 18px;
   text-align: start;
   width: 200px;
@@ -46,10 +48,10 @@
 }
 
 .cart-button {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background-color: rgb(236, 136, 43);
+  background-color: rgba(253, 148, 50, 0.77);
   border: none;
 }
 

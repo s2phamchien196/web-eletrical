@@ -26,18 +26,26 @@ const List = () => {
       <body>
         <div className="content">
           <ul className="exo-menu">
-            <li className="drop-down"><a href='/'><i className="fa fa-list"></i>Danh Mục Sản Phẩm</a>
-              <ul className="drop-down-ul animated fadeIn">
-                {renderListMenu()}
-              </ul>
+            <li>
+              <a className="active" href="/"><i className="fa fa-home"></i>Trang Chủ</a>
             </li>
-            <li><a className="active" href="/"><i className="fa fa-home"></i> Trang Chủ</a>
+            <li>
+              <a className="active" href="/cua-hang">Cửa Hàng</a>
             </li>
-            <li><a href="/product">Đổi Trả Miễn Phí Tại Nhà</a></li>
-            <li><a href="/truyen-hinh">Giao Hàng Từ 150.000Đ</a></li>
-            <li><a href="/phan-hoi">Hệ Thống Cửa Hàng</a></li>
-            <li className="blog-drop-down"><a href="/blog">Khuyến Mại</a>
-              <Blog />
+            <li>
+              <a className="active" href="/thuong-hieu">Thương Hiệu</a>
+            </li>
+            <li>
+              <a className="active" href="/bang-gia">Bảng Giá</a>
+            </li>
+            <li>
+              <a className="active" href="/tin-tuc">Tin Tức</a>
+            </li>
+            <li>
+              <a className="active" href="/tuyen-dung">Tuyển Dụng</a>
+            </li>
+            <li>
+              <a className="active" href="/lien-he">Liên Hệ</a>
             </li>
           </ul>
         </div>

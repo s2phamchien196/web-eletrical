@@ -1,0 +1,51 @@
+.popup-main {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.popup-header {
+  height: 50px;
+  border-bottom: 1px solid #ccc;
+}
+
+.popup-content {
+  margin: 10px;
+}
+
+.popup-close {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.md {
+  width: 768px;
+  /* height: 80%; */
+}
+
+.lg {
+  width: 992px;
+  height: 80%;
+}
+
+.xl {
+  width: 1200px;
+  height: 80%;
+}
