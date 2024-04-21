@@ -1,4 +1,6 @@
-export const host = "http://localhost:4000";
+const ipAddress = window.location.host;
+const hostName = ipAddress.replace(':3000', ':4000')
+export const host = "http://" + hostName;
 
 export const severGET = async (url, params, callBack) => {
   const queryParams = new URLSearchParams();
