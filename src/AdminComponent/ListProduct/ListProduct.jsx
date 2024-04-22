@@ -43,7 +43,7 @@ const ListProduct = () => {
     })
   }
 
-  const onRenderProduct = (product) => {
+  const onRenderProduct = (product, index) => {
     return (
       <AddProduct product={product} />
     )
@@ -88,7 +88,7 @@ const ListProduct = () => {
             <div>
               <div key={index} className='listproduct-format-main listproduct-format '>
                 <img src={host + product.image} width={50} alt="" className='listproduct-product-items' />
-                <UIPopup label={product.label} header={product.label} content={onRenderProduct(product)} />
+                <UIPopup label={product.label} header={product.label} content={onRenderProduct(product, index)} />
                 <p>{product.unit}</p>
                 <p>{Number(product.capital_price).toLocaleString()} {'đ'}</p>
                 <p>{Number(product.retail_price).toLocaleString()} {'đ'}</p>

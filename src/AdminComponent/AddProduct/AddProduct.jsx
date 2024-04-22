@@ -40,6 +40,10 @@ export class AddProduct extends Component {
 
   changeHandler = (e) => {
     this.productDetails[e.target.name] = e.target.value;
+    if (e.target.name === 'menu_name') {
+      let group = this.allmenus.find(sel => sel.name == this.productDetails.menu_name);
+      this.productDetails['group'] = group['items'][0];
+    }
     this.forceUpdate();
   }
 
@@ -73,10 +77,15 @@ export class AddProduct extends Component {
     })
   }
   saveProduct = async () => {
-    severPOST('/addproduct', this.productDetails, (bean) => {
-      alert("Product Success Added")
+    let { onModify } = this.props;
+    severPOST('/saveproduct', this.productDetails, (bean) => {
+      alert("Product Update Success ")
       this.productDetails = bean;
-      this.forceUpdate();
+      if (onModify) {
+        onModify(bean);
+      } else {
+        this.forceUpdate();
+      }
     }
     );
   }
@@ -110,13 +119,13 @@ export class AddProduct extends Component {
           <div className='flex-hbox'>
             <div className='w-50'>
               <p>Danh Mục Sản Phẩm</p>
-              <select value={this.productDetails.category} onChange={this.changeHandler} name='menu_name' className='add-menu-name-selector'>
+              <select value={this.productDetails.menu_name} onChange={this.changeHandler} name='menu_name' className='add-menu-name-selector'>
                 {this.onRenderMenu()}
               </select>
             </div>
             <div div className='w-50 mx-1'>
               <p>Nhóm Hàng</p>
-              <select value={this.productDetails.category} onChange={this.changeHandler} name='group' className='add-menu-name-selector'>
+              <select value={this.productDetails.group} onChange={this.changeHandler} name='group' className='add-menu-name-selector'>
                 {this.onRenderGroups()}
               </select>
             </div>

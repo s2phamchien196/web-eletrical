@@ -100,12 +100,11 @@ app.post('/addproduct', async (req, res) => {
 });
 
 app.post('/saveproduct', async (req, res) => {
-  let product = new Product();
-  product = req.body;
-  await product.save();
+  const { _id, ...updatedData } = req.body;
+  await Product.updateOne({ _id: _id }, updatedData);
   res.json({
     success: true,
-    body: req.body
+    body: req.body,
   })
 });
 
