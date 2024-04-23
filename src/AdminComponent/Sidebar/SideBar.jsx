@@ -19,6 +19,12 @@ const SideBar = () => {
           <p>Product List</p>
         </div>
       </Link>
+      <Link to={'/admin/addmenu'} style={{ textDecoration: 'none' }}>
+        <div className="sidebar-item">
+          <img src={add_product_item} alt='' />
+          <p>Add Menu</p>
+        </div>
+      </Link>
     </div>
   )
 }
