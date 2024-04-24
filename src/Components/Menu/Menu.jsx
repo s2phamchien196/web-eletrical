@@ -61,6 +61,8 @@ export class Menu extends Component {
     for (let sel of this.allMenus) {
       let collapse = sel['collapse'] ? true : false;
       sel['collapse'] = collapse;
+      let filter = this.products.filter(p => p.menu_name === sel.name);
+      let count = filter ? filter.length : 0;
 
       menus.push(
         <li className='flex-vbox' style={{ cursor: 'pointer' }}>
@@ -68,6 +70,7 @@ export class Menu extends Component {
             <div className='flex-grow-1' onClick={() => this.onShowItems(sel.name, 'menu_name')}>
               {sel.name}
             </div>
+            <span className='menu-count'>({count})</span>
             {collapse ?
               <FeatherIcon.ChevronUp size={12} style={{ margin: 'auto' }} onClick={() => this.onChange(sel, false)} />
               :
@@ -93,16 +96,25 @@ export class Menu extends Component {
       if (sel['collapse']) height += (sel['items'].length * h);
     }
     return (
-      <div className='flex-hbox'>
-        <div className='menu' style={{ height: height }}>
-          <div className='menu-header'>
-            Danh Mục Sản Phẩm
+      <div className='flex-vbox'>
+        <div className='menu-breadcrum flex-hbox'>
+          <span>{'Trang chủ /'}</span>
+          <span className='px-2' style={filter ?? { fontWeight: 500 }}>{this.selected}
+            {filter ? <span>/<span style={{ fontWeight: 500 }}>{filter}</span></span> : <></>}</span>
+        </div>
+        <div className='flex-hbox'>
+          <div className='menu flex-grow-0' style={{ height: height }}>
+            <div className='menu-header'>
+              Danh Mục Sản Phẩm
+            </div>
+            <ul className='menu-items'>
+              {this.onRenderLi()}
+            </ul>
+          </div >
+          <div className='flex-grow-1'>
+            <Popular products={this.products} filter={filter} menuName={this.selected} onModify={onModify} />
           </div>
-          <ul className='menu-items'>
-            {this.onRenderLi()}
-          </ul>
-        </div >
-        <Popular products={this.products} filter={filter} menuName={this.selected} onModify={onModify} />
+        </div>
       </div>
     )
   }

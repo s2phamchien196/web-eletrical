@@ -29,29 +29,33 @@ export class App extends Component {
     const currentURL = window.location.href;
     let checkAdmin = currentURL.includes('admin') ? true : false;
     return (
-      <div className="App body flex-vbox" style={{ height: '100vh' }}>
+      <div className="App body flex-vbox">
         <div className='flex-grow-1'>
           {!checkAdmin ?
-            <BrowserRouter className='main'>
+            <BrowserRouter>
               <NavbarComponent />
-              <Routes>
-                <Route path='/' element={<UIStore onModify={() => this.forceUpdate()} />}></Route>
-                {renderRoutePolicy()}
-                <Route path='/cua-hang' element={<UIStore onModify={() => this.forceUpdate()} />}>
-                  <Route path=':search' element={<UIStore onModify={() => this.forceUpdate()} />} />
-                </Route>
-                <Route path='/product' element={<UIProduct />}>
-                  <Route path=':productId' element={<UIProduct />} />
-                </Route>
-                <Route path='/login' element={<UILogin onModify={() => this.forceUpdate()} />}></Route>
-                {/* <Route path='/cart' element={<UI onModify={() => this.forceUpdate()} />}></Route> */}
-              </Routes>
+              <div className="main">
+                <Routes>
+                  <Route path='/' element={<UIStore onModify={() => this.forceUpdate()} />}></Route>
+                  {renderRoutePolicy()}
+                  <Route path='/cua-hang' element={<UIStore onModify={() => this.forceUpdate()} />}>
+                    <Route path=':search' element={<UIStore onModify={() => this.forceUpdate()} />} />
+                  </Route>
+                  <Route path='/product' element={<UIProduct />}>
+                    <Route path=':productId' element={<UIProduct />} />
+                  </Route>
+                  <Route path='/login' element={<UILogin onModify={() => this.forceUpdate()} />}></Route>
+                  {/* <Route path='/cart' element={<UI onModify={() => this.forceUpdate()} />}></Route> */}
+                </Routes>
+              </div>
             </BrowserRouter>
             :
-            <BrowserRouter>
-              <Navbar />
-              <Admin />
-            </BrowserRouter>
+            <div className="main">
+              <BrowserRouter>
+                <Navbar />
+                <Admin />
+              </BrowserRouter>
+            </div>
           }
         </div>
         <div className='flex-grow-0'>

@@ -16,12 +16,9 @@ export class Popular extends Component {
   }
 
   render() {
-    let { menuName, filter } = this.props;
     return (
       <div className='popular-body'>
         <div className='popular'>
-          <h4 className='px-2'>{menuName}  {filter ? <span style={{ fontSize: 15 }}>/ {filter}</span> : <></>}</h4>
-
           <div className='popular-items'>
             {this.renderItems()}
           </div>

@@ -24,9 +24,11 @@ export class UIItems extends Component {
 
     return (
       <div className={'item'}>
-        <Link to={`/product/${item._id}`} >
-          <img src={host + item['image']} alt="" />
-        </Link>
+        <div className="item-img">
+          <Link to={`/product/${item._id}`} >
+            <img src={host + item['image']} alt="" />
+          </Link>
+        </div>
         <div className="item-prices">
           <div className="flex-grow-1">
             <div className="item-price-new">
