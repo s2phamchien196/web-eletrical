@@ -15,6 +15,11 @@ export class UIProductDisplay extends Component {
         <div className="productdisplay-right mx-5">
           <Breadcrum product={product} />
           <h3>{product['label']}</h3>
+          <div className="flex-hbox">
+            <div className="price-new">
+              {Number(product['retail_price']).toLocaleString()} {'đ'}<span>/{`${product['unit']}`}</span>
+            </div>
+          </div>
           <div>
             <b>{'Mã SP'}</b> : <span>{product['code']}</span>
           </div>
@@ -24,19 +29,19 @@ export class UIProductDisplay extends Component {
           <p>
             {'(vui lòng thêm vào báo giá để nhận báo giá hoặc qua email: hungdunggialam@gmail.com)'}
           </p>
-          <div className="flex-hbox">
-            <div className="price-new">
-              {Number(product['retail_price']).toLocaleString()} {'đ'}<span>/{`${product['unit']}`}</span>
-            </div>
+          <div className='pd-description'>
+            {product['description']}
           </div>
           <div className="quantity_wrap my-2">
             <div className='flex-hbox'>
-              <span className="btn_quan btn_minus mx-2">-</span>
-              <input min="1" type="number" title="Số lượng" readonly="" id="quantity" className="quantity" name="quantity" value="1" style={{ width: 40 }} />
-              <span className="btn_quan btn_plus mx-2">+</span>
+              <div className='mx-3'>
+                <input type="button" value="-" className="btn-minus"></input>
+                <input min="1" type="number" title="Số lượng" readonly="" id="quantity" className="btn-quantity" name="quantity" value="1" style={{ width: 40 }} />
+                <input type="button" value="+" className="btn-plus"></input>
+              </div>
 
-              <button className='mx-2'>{'Thêm Vào Giỏ'}</button>
-              <button className='mx-2'>{'Mua Hàng'}</button>
+              <button className='mx-1 btn btn-danger' style={{ width: 120 }}>{'Thêm Vào Giỏ'}</button>
+              <button className='mx-1 btn btn-primary' style={{ width: 120 }}>{'Mua Hàng'}</button>
             </div>
           </div>
         </div>

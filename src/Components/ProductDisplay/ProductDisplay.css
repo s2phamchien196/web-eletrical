@@ -45,7 +45,7 @@
 }
 
 .price-new {
-  color: rgb(18, 159, 216);
+  color: rgb(231, 71, 40);
   font-size: 24px;
   font-weight: 700;
 }
@@ -87,4 +87,29 @@
   font-size: 15px;
   text-align: center;
   margin-left: 5px;
+}
+
+.pd-description {
+  white-space: pre-line;
+  border: 2px dashed rgb(221, 221, 221);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  color: rgb(77, 77, 77);
+  font-size: 15px;
+}
+
+.btn-minus {
+  width: 25px;
+  border: 1px solid rgb(221, 221, 221);
+}
+
+.btn-plus {
+  width: 25px;
+  border: 1px solid rgb(221, 221, 221);
+}
+
+.btn-quantity {
+  border: 1px solid rgb(221, 221, 221);
+  text-align: center;
 }

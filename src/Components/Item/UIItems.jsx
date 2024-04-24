@@ -27,9 +27,6 @@ export class UIItems extends Component {
         <Link to={`/product/${item._id}`} >
           <img src={host + item['image']} alt="" />
         </Link>
-        <div className="content">
-          <p className="flex-grow-1" style={{ whiteSpace: 'pre-line' }}>{item['label']}</p>
-        </div>
         <div className="item-prices">
           <div className="flex-grow-1">
             <div className="item-price-new">
@@ -50,6 +47,9 @@ export class UIItems extends Component {
             count ? <div className="item-cart-count">{count}</div> :
               <div></div>
           }
+        </div>
+        <div className="content">
+          <p className="flex-grow-1" title={item['label']}>{item['label']}</p>
         </div>
       </div>
     );

@@ -73,7 +73,7 @@ body {
   font-size: 22px;
   margin: 0;
   padding: 0;
-  font: 300 18px Roboto;
+  font: 400 18px Roboto;
 }
 
 @media screen and (min-width: 768px) {
