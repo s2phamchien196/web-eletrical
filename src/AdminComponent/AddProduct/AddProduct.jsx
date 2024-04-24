@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './AddProduct.css'
 import upload_area from '../assets/upload_area.svg'
 import { host, severPOST, severGET, severImagePOST } from '../../Components/AppContext'
+import { showNotification } from '../../Lib/input'
 
 export class AddProduct extends Component {
   productDetails = {
@@ -57,7 +58,7 @@ export class AddProduct extends Component {
         product.image = data.image_url;
         severPOST('/addproduct', this.productDetails, (bean) => {
           if (data.success) {
-            alert("Product Success Added")
+            showNotification('Product Success Added', 'success')
             this.productDetails = {
               ...this.productDetails,
               code: "",
@@ -70,19 +71,19 @@ export class AddProduct extends Component {
             };
             this.forceUpdate();
           } else {
-            alert("Failed!!!")
+            showNotification('Product Failed Added', 'danger')
           };
         })
       }
     })
   }
   saveProduct = async () => {
-    let { onModify } = this.props;
+    let { onPostCommit } = this.props;
     severPOST('/saveproduct', this.productDetails, (bean) => {
-      alert("Product Update Success ")
+      showNotification('Product Update Added', 'success')
       this.productDetails = bean;
-      if (onModify) {
-        onModify(bean);
+      if (onPostCommit) {
+        onPostCommit(bean);
       } else {
         this.forceUpdate();
       }
@@ -172,7 +173,7 @@ export class AddProduct extends Component {
         </div>
         <div className='flex-hbox' style={{ justifyContent: 'end' }}>
           {this.productDetails['_id'] ?
-            <button onClick={this.saveProduct} className='addproduct-bnt'>SAVE</button>
+            <button onClick={this.saveProduct} className='addproduct-bnt' data-dismiss="modal">SAVE</button>
             :
             <button onClick={this.addProduct} className='addproduct-bnt'>ADD</button>
           }

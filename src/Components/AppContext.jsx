@@ -1,6 +1,5 @@
-const ipAddress = window.location.host;
-const hostName = ipAddress.replace(':3000', ':4000')
-export const host = "http://" + hostName;
+import { getApiURL } from "../env";
+export const host = getApiURL();
 
 export const severGET = async (url, params, callBack) => {
   const queryParams = new URLSearchParams();

@@ -3,19 +3,23 @@ import './ListProduct.css'
 import cross_icon from '../assets/cross_icon.png'
 import { host, severGET, severPOST } from '../../Components/AppContext';
 import menu_data from './menu_data';
-import { UIPopup } from '../Popup/Popup'
 import { AddProduct } from '../AddProduct/AddProduct';
+import { ButtonDialogShow, showDialog } from '../../Lib/input';
 
 const ListProduct = () => {
   const [selected, setSelected] = useState('all');
   const [allproducts, setAllProducts] = useState([]);
   const [allmenus, setAllMenus] = useState([]);
   useEffect(() => {
+    onReloadData();
+  }, [])
+
+  const onReloadData = () => {
     severGET('/allproducts', {}, (data) => setAllProducts(data));
     severGET('/allmenus', {}, (data) => {
       setAllMenus(data)
     });
-  }, [])
+  }
 
   let onRemoveProduct = (id) => {
     severPOST('/removeproduct', { id: id }, () => {
@@ -88,7 +92,9 @@ const ListProduct = () => {
             <div>
               <div key={index} className='listproduct-format-main listproduct-format '>
                 <img src={host + product.image} width={50} alt="" className='listproduct-product-items' />
-                <UIPopup label={product.label} header={product.label} content={onRenderProduct(product, index)} />
+                <button type="button" className={`btn-link`} data-toggle="modal" data-target="#product" onClick={() => {
+                  showDialog('product', 'Detail', <AddProduct product={product} onPostCommit={() => onReloadData()} />)
+                }}> {product.label} </button>
                 <p>{product.unit}</p>
                 <p>{Number(product.capital_price).toLocaleString()} {'đ'}</p>
                 <p>{Number(product.retail_price).toLocaleString()} {'đ'}</p>

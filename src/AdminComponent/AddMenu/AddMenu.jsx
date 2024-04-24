@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
-import './AddMenu.css'
-import upload_area from '../assets/upload_area.svg'
-import { host, severPOST, severGET, severImagePOST } from '../../Components/AppContext'
+import './Menu.css'
+import { severPOST } from '../../Components/AppContext'
+import { BBMultiField, showNotification } from '../../Lib/input'
 
 export class AddMenu extends Component {
   menuDetails = {
     name: "",
-    items: "",
+    items: [],
+  }
+
+  constructor(props) {
+    super(props);
+    let { menu } = this.props;
+    if (menu) {
+      this.menuDetails = menu;
+      this.forceUpdate();
+    }
   }
 
   changeHandler = (e) => {
@@ -14,57 +23,35 @@ export class AddMenu extends Component {
     this.forceUpdate();
   }
 
-  addMenu = async () => {
+  saveMenu = async () => {
+    let { onPostCommit } = this.props;
     let menu = this.menuDetails;
-    let items = this.menuDetails.items.split(',');
-    severPOST('/addmenu', { name: menu.name, items: items }, (bean) => {
+    let items = menu['items'].filter(sel => sel);
+    menu['items'] = items;
+    severPOST('/savemenu', menu, (bean) => {
       this.menuDetails = {
         name: "",
         items: "",
       };
-      alert("Menu Success Added")
+      if (onPostCommit) {
+        console.log(onPostCommit);
+        onPostCommit(bean);
+      }
+      showNotification('Menu Success Added', 'success')
       this.forceUpdate();
     });
   }
-  // saveProduct = async () => {
-  //   let { onModify } = this.props;
-  //   severPOST('/saveproduct', this.productDetails, (bean) => {
-  //     alert("Product Update Success ")
-  //     this.productDetails = bean;
-  //     if (onModify) {
-  //       onModify(bean);
-  //     } else {
-  //       this.forceUpdate();
-  //     }
-  //   }
-  //   );
-  // }
-
-  // onRenderMenu = () => {
-  //   let options = [];
-  //   for (let sel of this.allmenus) {
-  //     options.push(
-  //       <option value={sel.name}>{sel.name}</option>
-  //     )
-  //   }
-  //   return options;
-  // }
 
   render() {
     return (
-      <div className='add-product'>
-        <div className="addproduct-itemfield">
+      <div className='add-menu'>
+        <div className="addmenu-itemfield">
           <p>Name</p>
           <input value={this.menuDetails.name} onChange={this.changeHandler} type='text' name='name' placeholder='' />
-          <p>Items</p>
-          <input value={this.menuDetails.items} onChange={this.changeHandler} type='text' name='items' placeholder='' />
+          <BBMultiField label={'Items'} bean={this.menuDetails} fieldName={'items'} />
         </div>
         <div className='flex-hbox' style={{ justifyContent: 'end' }}>
-          {this.menuDetails['_id'] ?
-            <button onClick={this.addMenu} className='addproduct-bnt'>SAVE</button>
-            :
-            <button onClick={this.addMenu} className='addproduct-bnt'>ADD</button>
-          }
+          <button onClick={this.saveMenu} className='addmenu-bnt' data-dismiss="modal">SAVE</button>
         </div>
       </div >
     )

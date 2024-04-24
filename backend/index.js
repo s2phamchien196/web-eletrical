@@ -7,11 +7,12 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const fs = require('fs');
+const database = "mongodb+srv://s2phamchien:chien196@seafoods.fmc9geo.mongodb.net/electrical";
 
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://s2phamchien:chien196@seafoods.fmc9geo.mongodb.net/electrical");
+mongoose.connect(database);
 
 
 app.get("/", (req, res) => {
@@ -255,6 +256,21 @@ app.post('/addmenu', async (req, res) => {
   });
   await menu.save();
   res.json({ success: true, body: menu });
+});
+
+app.post('/savemenu', async (req, res) => {
+  const { _id, ...updatedData } = req.body;
+  if (_id) {
+    await Menu.updateOne({ _id: _id }, updatedData);
+    res.json({
+      success: true,
+      body: req.body,
+    })
+  } else {
+    const menu = new Menu(req.body);
+    await menu.save();
+    res.json({ success: true, body: menu });
+  }
 });
 
 function getAllImages(directory) {

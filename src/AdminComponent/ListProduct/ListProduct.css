@@ -51,7 +51,7 @@
   overflow-y: scroll;
 }
 
-@media(max-width: 800) {
+@media(max-width: 800px) {
   .list-product {
     box-sizing: border-box;
     width: 95%;

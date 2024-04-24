@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import ListProduct from '../../AdminComponent/ListProduct/ListProduct'
 import SideBar from '../../AdminComponent/Sidebar/SideBar'
 import { AddProduct } from '../../AdminComponent/AddProduct/AddProduct'
-import { AddMenu } from '../../AdminComponent/AddMenu/AddMenu'
+import { MenuList } from '../../AdminComponent/AddMenu/MenuList'
 
 const Admin = () => {
   return (
@@ -13,7 +13,7 @@ const Admin = () => {
       <Routes>
         <Route path='/admin/addproduct' element={<AddProduct />} />
         <Route path='/admin/listproduct' element={<ListProduct />} />
-        <Route path='/admin/addmenu' element={<AddMenu />} />
+        <Route path='/admin/addmenu' element={<MenuList />} />
       </Routes>
     </div>
   )

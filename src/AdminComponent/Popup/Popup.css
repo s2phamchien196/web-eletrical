@@ -17,6 +17,8 @@
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .popup-header {
@@ -37,7 +39,6 @@
 
 .md {
   width: 768px;
-  /* height: 80%; */
 }
 
 .lg {
