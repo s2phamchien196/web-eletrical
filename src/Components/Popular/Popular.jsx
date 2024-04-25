@@ -41,6 +41,7 @@ export class Popular extends Component {
 
   renderButton = () => {
     let buttons = []
+    if (this.breakPages.length < 1) return;
     this.breakPages.forEach((sel, index) => {
       buttons.push(
         <button className='btn-info btn-md p-3 m-2' key={`popular-pages-btn-${index}`} onClick={() => this.onClick(index)}>
