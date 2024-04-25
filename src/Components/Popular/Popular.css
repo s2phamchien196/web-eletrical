@@ -31,6 +31,14 @@
   border: 2px solid #eaeaea;
 }
 
+.popular-pages button {
+  line-height: 10px;
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+  border: none;
+}
+
 @media screen and (max-width: 576px) {
   .popular-items {
     grid-template-columns: repeat(1, minmax(0, 1fr));

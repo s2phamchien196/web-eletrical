@@ -10,14 +10,14 @@
   padding-left: 15px;
   height: 50px;
   color: white;
-  background-color: rgb(0, 102, 191);
+  background-color: rgb(7, 21, 66);
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .menu-items {
-  font-size: 15px;
+  font-size: 18px;
   text-align: start;
   padding-left: 15px;
   padding-right: 15px;
@@ -25,7 +25,7 @@
 }
 
 .menu-items li {
-  line-height: 30px;
+  line-height: 50px;
   border-bottom: 1px solid #c4c4c4a9;
 }
 

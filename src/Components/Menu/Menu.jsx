@@ -1,25 +1,27 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import './Menu.css';
 import * as FeatherIcon from 'react-feather';
 
 import { severGET } from '../AppContext'
 import { Popular } from '../Popular/Popular';
+import { scrollUpHeader } from '../../Lib/utils'
 
 export class Menu extends Component {
   allMenus = [];
   selected = 'Cửa Hàng';
   products = [];
+  filterProducts = [];
+  uikey = 0;
+
   constructor(props) {
     super(props);
     let { filter } = props;
     severGET('/allmenus', {}, (data) => {
       this.allMenus = data;
-      this.forceUpdate()
     });
 
     severGET('/product', {}, (beans) => {
       if (filter) {
-        console.log(filter);
         for (let sel of beans) {
           let label = sel['label'];
           if (label.includes(filter)) this.products.push(sel);
@@ -27,6 +29,7 @@ export class Menu extends Component {
       } else {
         this.products = beans;
       }
+      this.filterProducts = this.products;
       this.forceUpdate();
     })
   }
@@ -38,22 +41,24 @@ export class Menu extends Component {
 
   onRenderItems = (items) => {
     let menus = [];
+    let i = 0;
     for (let sel of items) {
       menus.push(
-        <li onClick={() => this.onShowItems(sel, 'group')}>
+        <li key={`menu-item-${i}`} onClick={() => this.onShowItems(sel, 'group')}>
           {sel}
         </li>
       )
+      i++;
     }
     return menus;
   }
 
   onShowItems = (name, fieldName) => {
     this.selected = name;
-    severGET('/product', { name: name, fieldName: fieldName }, (beans) => {
-      this.products = beans;
-      this.forceUpdate();
-    })
+    this.filterProducts = this.products.filter(sel => sel[fieldName] == name);
+    this.uikey++;
+    scrollUpHeader();
+    this.forceUpdate();
   }
 
   onRenderLi = () => {
@@ -73,9 +78,9 @@ export class Menu extends Component {
             </div>
             <span className='menu-count'>({count})</span>
             {collapse ?
-              <FeatherIcon.ChevronUp size={12} style={{ margin: 'auto' }} onClick={() => this.onChange(sel, false)} />
+              <FeatherIcon.ChevronUp size={20} style={{ margin: 'auto' }} onClick={() => this.onChange(sel, false)} />
               :
-              <FeatherIcon.ChevronDown size={12} style={{ margin: 'auto' }} onClick={() => this.onChange(sel, true)} />
+              <FeatherIcon.ChevronDown size={20} style={{ margin: 'auto' }} onClick={() => this.onChange(sel, true)} />
             }
           </div>
           {collapse ?
@@ -92,11 +97,12 @@ export class Menu extends Component {
   }
   render() {
     let { onModify, filter } = this.props;
-    let h = 38;
+    let h = 56;
     let height = this.allMenus.length * h;
     for (let sel of this.allMenus) {
       if (sel['collapse']) height += (sel['items'].length * h);
     }
+    if (this.filterProducts.length == 0) return;
     return (
       <div className='flex-vbox'>
         <div className='menu-breadcrum flex-hbox'>
@@ -114,7 +120,7 @@ export class Menu extends Component {
             </ul>
           </div >
           <div className='flex-grow-1'>
-            <Popular products={this.products} filter={filter} menuName={this.selected} onModify={onModify} />
+            <Popular key={`popular-${this.uikey}`} products={this.filterProducts} filter={filter} menuName={this.selected} onModify={onModify} />
           </div>
         </div>
       </div>

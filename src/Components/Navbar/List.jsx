@@ -4,7 +4,6 @@ import './List.css'
 const List = () => {
   return (
     <div>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
       <body>
         <div className="navbar-content">
           <ul className="exo-menu">

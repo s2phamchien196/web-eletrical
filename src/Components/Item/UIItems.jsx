@@ -22,7 +22,16 @@ export class UIItems extends Component {
         <div className="item-prices">
           <div className="flex-grow-1">
             <div className="item-price-new">
-              {price.toLocaleString()} {'đ'}<span>/{`${item['unit']}`}</span>
+
+              {price == 0 ?
+                <>
+                  {'Liên Hệ'}
+                </> :
+                <>
+                  {price.toLocaleString()} {'đ'}
+                  <span>/{`${item['unit'] ? item['unit'] : 'Cái'}`}</span>
+                </>
+              }
             </div>
           </div>
           <div>

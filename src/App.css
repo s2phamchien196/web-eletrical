@@ -69,14 +69,12 @@
 }
 
 body {
-  /* height: 100vh; */
-  /* font-size: 22px; */
   margin: 0;
   padding: 0;
-  font: 400 12px;
+  font: 400;
   font-family: 'Cabin', sans-serif;
   line-height: 33px;
-  /* font-family: */
+  font-size: 15px;
 }
 
 .main {
