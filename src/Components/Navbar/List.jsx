@@ -1,22 +1,5 @@
 import React from 'react'
 import './List.css'
-import seafood_data from '../Assets/info_data';
-import { Link } from 'react-router-dom';
-import Blog from './Blog';
-
-
-const renderListMenu = () => {
-  let contents = [];
-  seafood_data.menu.forEach(sel => {
-    contents.push(
-      <li onClick={() => {
-      }}>
-        <Link to={sel.link}>{sel.label}</Link>
-      </li>
-    )
-  });
-  return contents;
-}
 
 const List = () => {
   return (

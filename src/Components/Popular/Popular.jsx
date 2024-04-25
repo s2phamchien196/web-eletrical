@@ -5,24 +5,20 @@ export class Popular extends Component {
   renderItems = () => {
     let { onModify, products } = this.props;
     let contents = [];
+    let i = 0;
     for (let sel of products) {
       contents.push(
-        <div>
-          <UIItems key={sel.id} id={sel.id} item={sel} onModify={onModify} />
-        </div>
-      )
+        <UIItems key={`items-${i}`} item={sel} onModify={onModify} />
+      );
+      i++;
     }
     return contents;
   }
 
   render() {
     return (
-      <div className='popular-body'>
-        <div className='popular'>
-          <div className='popular-items'>
-            {this.renderItems()}
-          </div>
-        </div>
+      <div className='popular-body popular popular-items'>
+        {this.renderItems()}
       </div>
     )
   }

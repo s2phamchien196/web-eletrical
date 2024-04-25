@@ -7,6 +7,7 @@ import UIPolicy from './Pages/UIPolicy';
 import { NavbarComponent } from './Components/Navbar/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UIProduct } from './Pages/UIProduct';
+import { UIHomePage } from './Components/Home/UIHomePage';
 
 import { UIStore } from "./Pages/Store";
 import Navbar from "./AdminComponent/Navbar/Navbar";
@@ -32,23 +33,25 @@ export class App extends Component {
       <div className="App body flex-vbox">
         <div className='flex-grow-1'>
           {!checkAdmin ?
-            <BrowserRouter>
-              <NavbarComponent />
-              <div className="main">
-                <Routes>
-                  <Route path='/' element={<UIStore onModify={() => this.forceUpdate()} />}></Route>
-                  {renderRoutePolicy()}
-                  <Route path='/cua-hang' element={<UIStore onModify={() => this.forceUpdate()} />}>
-                    <Route path=':search' element={<UIStore onModify={() => this.forceUpdate()} />} />
-                  </Route>
-                  <Route path='/product' element={<UIProduct />}>
-                    <Route path=':productId' element={<UIProduct />} />
-                  </Route>
-                  <Route path='/login' element={<UILogin onModify={() => this.forceUpdate()} />}></Route>
-                  {/* <Route path='/cart' element={<UI onModify={() => this.forceUpdate()} />}></Route> */}
-                </Routes>
-              </div>
-            </BrowserRouter>
+            <div>
+              <BrowserRouter>
+                <NavbarComponent />
+                <div className="main">
+                  <Routes>
+                    <Route path='/' element={<UIHomePage onModify={() => this.forceUpdate()} />}></Route>
+                    {/* {renderRoutePolicy()} */}
+                    <Route path='/cua-hang' element={<UIStore onModify={() => this.forceUpdate()} />}>
+                      <Route path=':search' element={<UIStore onModify={() => this.forceUpdate()} />} />
+                    </Route>
+                    <Route path='/product' element={<UIProduct />}>
+                      <Route path=':productId' element={<UIProduct />} />
+                    </Route>
+                    <Route path='/login' element={<UILogin onModify={() => this.forceUpdate()} />}></Route>
+                    {/* <Route path='/cart' element={<UI onModify={() => this.forceUpdate()} />}></Route> */}
+                  </Routes>
+                </div>
+              </BrowserRouter>
+            </div>
             :
             <div className="main">
               <BrowserRouter>
@@ -59,7 +62,7 @@ export class App extends Component {
           }
         </div>
         <div className='flex-grow-0'>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     );

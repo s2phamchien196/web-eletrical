@@ -2,10 +2,9 @@ import React from 'react'
 import './Footer.css'
 import FeatherIcon from 'feather-icons-react';
 import Contact from '../Contact/Contact';
-import info_data from '../Assets/info_data'
 import policies from '../Assets/policies';
 
-
+const info_data = {};
 const renderContact = () => {
   let contents = [];
   for (let sel of info_data.address) {

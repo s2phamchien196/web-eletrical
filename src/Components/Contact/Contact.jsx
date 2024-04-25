@@ -1,7 +1,6 @@
 import React from 'react'
 import './Contact.css'
-import banner_data from '../Assets/info_data'
-
+const banner_data = {};
 const Contact = () => {
   return (
     <div className='contact'>

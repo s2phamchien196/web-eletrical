@@ -1,5 +1,4 @@
-import info_data from './info_data'
-
+const info_data = {};
 const websiteConfig = {
   name: 'HAISANHAIPHONG.VN',
   link: 'http://haisanhaiphong.vn',

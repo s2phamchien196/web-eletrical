@@ -300,4 +300,33 @@ app.get('/images', (req, res) => {
 });
 
 
+const ShopInfo = mongoose.model("ShopInfo", {
+  website_name: {
+    type: String
+  },
+  website: {
+    type: String
+  },
+  address: {
+    type: String,
+  },
+  mobile: {
+    type: String,
+  },
+  zalo: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+})
+
+app.get("/info", async (req, res) => {
+  let menus = await ShopInfo.find({});
+  res.send(menus[0]);
+})
+
 

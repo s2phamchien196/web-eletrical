@@ -58,6 +58,7 @@ export class Menu extends Component {
 
   onRenderLi = () => {
     let menus = [];
+    let i = 0;
     for (let sel of this.allMenus) {
       let collapse = sel['collapse'] ? true : false;
       sel['collapse'] = collapse;
@@ -65,7 +66,7 @@ export class Menu extends Component {
       let count = filter ? filter.length : 0;
 
       menus.push(
-        <li className='flex-vbox' style={{ cursor: 'pointer' }}>
+        <li key={`menu-${i}`} className='flex-vbox' style={{ cursor: 'pointer' }}>
           <div className='flex-hbox'>
             <div className='flex-grow-1' onClick={() => this.onShowItems(sel.name, 'menu_name')}>
               {sel.name}
@@ -85,6 +86,7 @@ export class Menu extends Component {
           }
         </li>
       )
+      i++;
     }
     return menus;
   }
