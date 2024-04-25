@@ -1,40 +1,15 @@
 .footer {
-  padding: 50px;
+  padding: 40px;
   height: 400px;
   display: grid;
   justify-content: end;
   align-items: start;
   text-align: start;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  background-color: cadetblue;
+  grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+  background-color: rgb(102, 102, 102);
   gap: 30px;
   color: antiquewhite;
-  margin-top: 30px;
+  margin-top: 20px;
   font-weight: 400;
   font-size: 18px;
-}
-
-.shop-address span {
-  color: gold;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.shop-address {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.footer a {
-  display: flex;
-  color: antiquewhite;
-  padding-top: 10px;
-}
-
-.policy-hr {
-  width: 100px;
-  height: 5px;
-  border-radius: 20px;
-  background: #5b5b5b;
 }

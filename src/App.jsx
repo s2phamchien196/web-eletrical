@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './App.css';
 
-import Footer from './Components/Footer/Footer';
+import { UIFooter } from './Components/Footer/Footer';
 import policies from './Components/Assets/policies';
 import UIPolicy from './Pages/UIPolicy';
 import { NavbarComponent } from './Components/Navbar/Navbar';
@@ -62,7 +62,7 @@ export class App extends Component {
           }
         </div>
         <div className='flex-grow-0'>
-          {/* <Footer /> */}
+          <UIFooter />
         </div>
       </div>
     );

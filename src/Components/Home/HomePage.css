@@ -33,6 +33,8 @@
   justify-content: center;
   text-align: center;
   align-items: center;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 
@@ -43,6 +45,26 @@
 
 .home-page {
   margin-top: 10px;
+}
+
+.home-service-items {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr;
+  gap: 30px;
+  text-align: start;
+  font-size: 18px;
+  white-space: pre-line;
+}
+
+.home-service-items img {
+  height: 70px;
+  margin-right: 20px;
+  margin-top: 20px
+}
+
+.home-service-items hr {
+  margin: 0;
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 576px) {
