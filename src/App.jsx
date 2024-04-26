@@ -13,11 +13,14 @@ import { UIStore } from "./Pages/Store";
 import Navbar from "./AdminComponent/Navbar/Navbar";
 import Admin from "./Pages/Admin/Admin";
 import { UILogin } from "./AdminComponent/Login/Login";
-import { severGET, setUser, getUser } from './Components/AppContext'
+import { severGET, setUser, getUser, setInfo } from './Components/AppContext'
 
 export class App extends Component {
   constructor(props) {
     super(props);
+    severGET('/info', {}, (bean) => {
+      setInfo(bean);
+    })
     this.onRegister();
   }
 

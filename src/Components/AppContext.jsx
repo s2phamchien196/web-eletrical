@@ -1,6 +1,15 @@
 import { getApiURL } from "../env";
 export const host = getApiURL();
-export let user = null;
+export let user = {};
+export let info = {};
+
+export const getInfo = () => {
+  return info;
+}
+
+export const setInfo = (infoDb) => {
+  info = infoDb;
+}
 
 export const getUser = () => {
   return user;

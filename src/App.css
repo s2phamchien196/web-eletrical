@@ -81,33 +81,28 @@ body {
   width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 165px;
 }
 
 @media screen and (max-width: 576px) {
   .main {
-    margin-top: 320px;
     width: 576px;
   }
 }
 
 @media screen and (min-width: 576px) {
   .main {
-    margin-top: 320px;
     width: 576px;
   }
 }
 
 @media screen and (min-width: 768px) {
   .main {
-    margin-top: 235px;
     width: 768px;
   }
 }
 
 @media screen and (min-width: 992px) {
   .main {
-    margin-top: 180px;
     width: 992px;
   }
 }

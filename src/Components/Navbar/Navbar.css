@@ -26,6 +26,10 @@
   z-index: 1000;
 }
 
+.nav-header {
+  height: 165px;
+}
+
 .nav-logo {
   display: flex;
   align-items: center;
@@ -123,8 +127,26 @@
   }
 }
 
+@media screen and (min-width: 576px) {
+  .nav-header {
+    height: 320px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .nav-header {
+    height: 240px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .nav-header {
+    height: 165px;
+  }
+}
+
 @media screen and (min-width: 1200px) {
-  .header {
-    width: 1200px;
+  .nav-header {
+    height: 165px;
   }
 }

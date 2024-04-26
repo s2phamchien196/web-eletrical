@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import './ProductDisplay.css'
 import Breadcrum from '../Breadcrum/Breadcrum';
-import { host } from '../AppContext'
+import { host, getInfo } from '../AppContext'
 
 export class UIProductDisplay extends Component {
   render() {
     let { product } = this.props;
+    let info = getInfo();
     let img = product.image;
     return (
       <div className='productdisplay'>
@@ -27,7 +28,7 @@ export class UIProductDisplay extends Component {
             {'Giá sản phẩm rẻ hơn khi mua số lượng nhiều'}
           </i>
           <p>
-            {'(vui lòng thêm vào báo giá để nhận báo giá hoặc qua email: hungdunggialam@gmail.com)'}
+            {`(vui lòng thêm vào báo giá để nhận báo giá hoặc qua email: ${info['email']})`}
           </p>
           <div className='pd-description'>
             {product['description']}

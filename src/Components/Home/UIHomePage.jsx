@@ -14,22 +14,13 @@ import home_info5 from '../Assets/home-info5.png'
 import home_info6 from '../Assets/home-info6.png'
 import home_info7 from '../Assets/home-info7.png'
 
-import { severGET } from '../AppContext'
+import { severGET, getInfo } from '../AppContext'
 
 import * as FeatherIcon from "react-feather";
 
 export class UIHomePage extends Component {
-  info;
-  constructor(props) {
-    super(props);
-    severGET('/info', {}, (bean) => {
-      this.info = bean;
-      this.forceUpdate();
-    })
-  }
-
   render() {
-    if (!this.info) return;
+    let info = getInfo();
     return (
       <div className="home-page">
         <img className="home-page-img" src={page} alt="" />
@@ -46,7 +37,7 @@ export class UIHomePage extends Component {
               <img src={phone24} alt="" />
               <div className="flex-vbox">
                 <h4>Hỗ trợ tư vấn</h4>
-                <p>{this.info.mobile}</p>
+                <p>{info.mobile}</p>
               </div>
             </div>
             <div className="flex-hbox">
@@ -66,23 +57,23 @@ export class UIHomePage extends Component {
           </div>
         </div>
         <div className="home-page-info">
-          <h2>{this.info.website_name}</h2>
+          <h2>{info.website_name}</h2>
           <div className="flex-hbox  align-items-center">
             <FeatherIcon.Home className="m-2" size={18} />
-            <span>{this.info.address}</span>
+            <span>{info.address}</span>
           </div>
           <div className="flex-hbox  align-items-center">
             <FeatherIcon.Phone className="m-2" size={18} />
-            <a className="text-primary px-1" href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">{this.info.mobile}</a>/
-            <a className="text-primary px-1" href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">Zalo:{this.info.zalo}</a>
+            <a className="text-primary px-1" href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">{info.mobile}</a>/
+            <a className="text-primary px-1" href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">Zalo:{info.zalo}</a>
           </div>
           <div className="flex-hbox align-items-center" style={{ alignItems: 'center' }}>
             <FeatherIcon.Mail className="mx-1" size={18} />
-            <a className="text-primary px-1" href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">{this.info.email}</a>
+            <a className="text-primary px-1" href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">{info.email}</a>
             |<FeatherIcon.Globe className="m-2" size={18} />
-            <a className="text-primary" href={this.info.website} target="_blank" rel="noopener noreferrer">{this.info.website}</a>
+            <a className="text-primary" href={info.website} target="_blank" rel="noopener noreferrer">{info.website}</a>
           </div>
-          <div style={{ fontWeight: 300, whiteSpace: 'pre-line', textAlign: 'start' }}>{this.info.description}</div>
+          <div style={{ fontWeight: 300, whiteSpace: 'pre-line', textAlign: 'start' }}>{info.description}</div>
         </div>
         <UIHomeService />
       </div>
