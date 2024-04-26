@@ -1,8 +1,21 @@
 import { getApiURL } from "../env";
 export const host = getApiURL();
+export let user = null;
+
+export const getUser = () => {
+  return user;
+}
+
+export const setUser = (userDb) => {
+  if (userDb['errors']) {
+    user = { cartData: {} };
+  } else {
+    user = userDb;
+  }
+}
 
 const token = localStorage.getItem("auth-token");
-const authToken = JSON.parse(token)
+const authToken = JSON.parse(token);
 
 export const severGET = async (url, params, callBack) => {
   const queryParams = new URLSearchParams();

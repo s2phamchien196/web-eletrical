@@ -2,18 +2,24 @@ import React, { Component } from "react";
 import './Item.css'
 import cart_icon from '../Assets/cart_icon.png'
 import { Link } from "react-router-dom";
-import { host, severPOST } from "../AppContext";
-import { showNotification } from "../../Lib/input";
+import { host, severPOST, getUser } from "../AppContext";
+import { showNotification, showDialog } from "../../Lib/input";
+import { UILogin } from "../Login/Login";
 
 
 export class UIItems extends Component {
   onAddToCart = (item) => {
     let { onAddToCart } = this.props;
-    severPOST('/addtocart', { productId: item['_id'] }, (bean) => {
-      showNotification('Add Product Success', 'success')
-      if (onAddToCart) onAddToCart(item);
-      this.forceUpdate();
-    })
+    let user = getUser();
+    if (!user['_id']) {
+      showDialog('login', 'Đăng Nhập', <UILogin onPostCommit={this.onRegister} />);
+    } else {
+      severPOST('/addtocart', { productId: item['_id'] }, (bean) => {
+        showNotification('Add Product Success', 'success')
+        if (onAddToCart) onAddToCart(item);
+        this.forceUpdate();
+      })
+    }
   }
 
   render() {
@@ -21,7 +27,9 @@ export class UIItems extends Component {
     let price = Number(item['retail_price']);
     price = Math.round(price);
     let userBuy = 0;
-
+    let user = getUser();
+    let cartData = user.cartData;
+    let productTotalItems = cartData[item['_id']] ? cartData[item['_id']] : 0;
     return (
       <div className={'item'}>
         <div className="item-img">
@@ -45,7 +53,7 @@ export class UIItems extends Component {
             </div>
           </div>
           <div>
-            <button className="cart-button flex-grow-0" onClick={() => {
+            <button className="cart-button flex-grow-0" data-toggle="modal" data-target="#login" onClick={() => {
               userBuy++;
               this.onAddToCart(item);
             }}>
@@ -53,7 +61,7 @@ export class UIItems extends Component {
             </button>
           </div>
           {
-            userBuy ? <div className="item-cart-count">{userBuy}</div> :
+            productTotalItems ? <div className="item-cart-count">{productTotalItems}</div> :
               <div></div>
           }
         </div>

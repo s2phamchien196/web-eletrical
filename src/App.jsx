@@ -13,10 +13,9 @@ import { UIStore } from "./Pages/Store";
 import Navbar from "./AdminComponent/Navbar/Navbar";
 import Admin from "./Pages/Admin/Admin";
 import { UILogin } from "./AdminComponent/Login/Login";
-import { severGET } from './Components/AppContext'
+import { severGET, setUser, getUser } from './Components/AppContext'
 
 export class App extends Component {
-  user = null;
   constructor(props) {
     super(props);
     this.onRegister();
@@ -24,13 +23,13 @@ export class App extends Component {
 
   onRegister = () => {
     severGET('/userinfo/token', {}, (bean) => {
-      this.user = bean;
+      setUser(bean);
       this.forceUpdate();
     })
   }
 
   render() {
-    if (!this.user) return;
+    if (!getUser()) return;
     const currentURL = window.location.href;
     let checkAdmin = currentURL.includes('admin') ? true : false;
     return (
@@ -39,7 +38,7 @@ export class App extends Component {
           {!checkAdmin ?
             <div>
               <BrowserRouter>
-                <NavbarComponent user={this.user} />
+                <NavbarComponent user={getUser()} />
                 <div className="main">
                   <Routes>
                     <Route path='/' element={<UIHomePage onModify={() => this.forceUpdate()} />}></Route>

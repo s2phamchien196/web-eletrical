@@ -19,7 +19,7 @@ export class UILogin extends Component {
       localStorage.setItem("auth-token", jsonData);
       this.mode = 'login';
       if (onPostCommit) onPostCommit(bean);
-      this.forceUpdate();
+      window.location.reload();
     })
   }
 
@@ -29,7 +29,7 @@ export class UILogin extends Component {
       const jsonData = JSON.stringify(bean);
       localStorage.setItem("auth-token", jsonData);
       if (onPostCommit) onPostCommit(bean);
-      this.forceUpdate();
+      window.location.reload();
     })
   }
 

@@ -105,7 +105,7 @@ const Notification = (props) => {
   }
 
   return dismissed ? null : (
-    <div className={`alert alert-${type}`} style={{ position: 'fixed', margin: 10, top: 0, right: 0 }}>
+    <div className={`alert alert-${type}`} style={{ position: 'fixed', margin: 10, top: 0, right: 0, zIndex: 1001 }}>
       <strong>{label}</strong>  {content}
     </div>
   );

@@ -5,7 +5,7 @@ import whatsapp_icon from '../Assets/whatsapp_icon.png';
 import './Navbar.css';
 import { Link } from "react-router-dom";
 import List from "./List";
-import { severGET } from '../AppContext'
+import { severGET, setUser, getUser } from '../AppContext'
 import { showDialog } from "../../Lib/input";
 import { UILogin } from "../Login/Login";
 
@@ -25,14 +25,13 @@ export class NavbarComponent extends Component {
 
   onRegister = () => {
     severGET('/userinfo/token', {}, (bean) => {
-      let { user } = this.props;
-      user = bean;
+      setUser(bean);
       this.forceUpdate();
     })
   }
 
   render() {
-    let { user } = this.props;
+    let user = getUser();
     if (!this.infoData) return;
     const handleChange = (event) => {
       this.param.search = event.target.value;
@@ -44,7 +43,7 @@ export class NavbarComponent extends Component {
         window.location.href = `/cua-hang/${this.param.search}`;
       }
     };
-    let buy = user.cartData['count'];
+    let buy = user['_id'] ? user.cartData['count'] : 0;
     return (
       <div className="navbar-main">
         <div className="flex-vbox header">
@@ -76,7 +75,7 @@ export class NavbarComponent extends Component {
                 <button type="button" className="btn btn-link btn-md" onClick={() => {
                   localStorage.removeItem('auth-token');
                   user = null;
-                  this.forceUpdate();
+                  window.location.reload();
                 }}>
                   {'Đăng Xuất'}
                 </button>
