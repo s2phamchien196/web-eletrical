@@ -28,7 +28,6 @@ export class MenuList extends Component {
           <h3 className='flex-grow-1'>List Menu {`(${this.menus.length})`}</h3>
           <button type="button" className={`btn btn-info btn-lg`} data-toggle="modal" data-target="#add-menu" onClick={() => {
             showDialog('add-menu', 'New Menu', <AddMenu onPostCommit={(bean) => {
-              console.log('thiss');
               this.onReloadData();
             }} />)
           }}>

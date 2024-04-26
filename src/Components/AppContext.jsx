@@ -1,6 +1,9 @@
 import { getApiURL } from "../env";
 export const host = getApiURL();
 
+const token = localStorage.getItem("auth-token");
+const authToken = JSON.parse(token)
+
 export const severGET = async (url, params, callBack) => {
   const queryParams = new URLSearchParams();
   for (let key in params) {
@@ -12,7 +15,8 @@ export const severGET = async (url, params, callBack) => {
     method: 'GET',
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'auth-token': authToken,
     },
   })
     .then((res) => res.json())
@@ -26,7 +30,8 @@ export const severPOST = async (url, body, callBack) => {
     method: 'POST',
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'auth-token': authToken,
     },
     body: JSON.stringify(body)
   })
@@ -41,7 +46,8 @@ export const severImagePOST = async (url, body, callBack) => {
   await fetch(host + url, {
     method: 'POST',
     headers: {
-      Accept: 'application/json'
+      Accept: 'application/json',
+      'auth-token': authToken,
     },
     body: body
   })
@@ -56,7 +62,8 @@ export const severPUT = async (url, body, callBack) => {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'auth-token': authToken,
     },
     body: JSON.stringify(body)
   })

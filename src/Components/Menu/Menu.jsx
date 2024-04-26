@@ -23,8 +23,8 @@ export class Menu extends Component {
     severGET('/product', {}, (beans) => {
       if (filter) {
         for (let sel of beans) {
-          let label = sel['label'];
-          if (label.includes(filter)) this.products.push(sel);
+          let label = sel['label'].toUpperCase();
+          if (label.includes(filter.toUpperCase())) this.products.push(sel);
         }
       } else {
         this.products = beans;
@@ -96,7 +96,7 @@ export class Menu extends Component {
     return menus;
   }
   render() {
-    let { onModify, filter } = this.props;
+    let { onAddToCart, filter } = this.props;
     let h = 56;
     let height = this.allMenus.length * h;
     for (let sel of this.allMenus) {
@@ -106,9 +106,17 @@ export class Menu extends Component {
     return (
       <div className='flex-vbox'>
         <div className='menu-breadcrum flex-hbox'>
-          <span>{'Trang chủ /'}</span>
-          <span className='px-2' style={filter ?? { fontWeight: 500 }}>{this.selected}
-            {filter ? <span>/<span style={{ fontWeight: 500 }}>{filter}</span></span> : <></>}</span>
+          {filter ?
+            <>
+              <span>{'Tìm Kiếm /'}</span>
+              <span className='px-2' style={{ fontWeight: 500 }}>{filter}</span>
+            </>
+            :
+            <>
+              <span>{'Trang chủ /'}</span>
+              <span className='px-2' style={{ fontWeight: 500 }}>{this.selected}</span>
+            </>
+          }
         </div>
         <div className='flex-hbox'>
           <div className='menu flex-grow-0' style={{ height: height }}>
@@ -120,7 +128,7 @@ export class Menu extends Component {
             </ul>
           </div >
           <div className='flex-grow-1'>
-            <Popular key={`popular-${this.uikey}`} products={this.filterProducts} filter={filter} menuName={this.selected} onModify={onModify} />
+            <Popular key={`popular-${this.uikey}`} products={this.filterProducts} filter={filter} menuName={this.selected} onAddToCart={onAddToCart} />
           </div>
         </div>
       </div>

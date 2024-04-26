@@ -82,7 +82,7 @@ export class UIHomePage extends Component {
             |<FeatherIcon.Globe className="m-2" size={18} />
             <a className="text-primary" href={this.info.website} target="_blank" rel="noopener noreferrer">{this.info.website}</a>
           </div>
-          <div style={{ fontWeight: 300 }}>{this.info.description}</div>
+          <div style={{ fontWeight: 300, whiteSpace: 'pre-line', textAlign: 'start' }}>{this.info.description}</div>
         </div>
         <UIHomeService />
       </div>

@@ -21,12 +21,12 @@ export class Popular extends Component {
   }
 
   renderItems = (products) => {
-    let { onModify } = this.props;
+    let { onAddToCart } = this.props;
     let contents = [];
     let i = 0;
     for (let sel of products) {
       contents.push(
-        <UIItems key={`items-${i}`} item={sel} onModify={onModify} />
+        <UIItems key={`items-${i}`} item={sel} onAddToCart={onAddToCart} />
       );
       i++;
     }

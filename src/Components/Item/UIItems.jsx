@@ -2,12 +2,22 @@ import React, { Component } from "react";
 import './Item.css'
 import cart_icon from '../Assets/cart_icon.png'
 import { Link } from "react-router-dom";
-import { host } from "../AppContext";
+import { host, severPOST } from "../AppContext";
+import { showNotification } from "../../Lib/input";
 
 
 export class UIItems extends Component {
+  onAddToCart = (item) => {
+    let { onAddToCart } = this.props;
+    severPOST('/addtocart', { productId: item['_id'] }, (bean) => {
+      showNotification('Add Product Success', 'success')
+      if (onAddToCart) onAddToCart(item);
+      this.forceUpdate();
+    })
+  }
+
   render() {
-    let { item, onModify } = this.props;
+    let { item } = this.props;
     let price = Number(item['retail_price']);
     price = Math.round(price);
     let userBuy = 0;
@@ -37,7 +47,7 @@ export class UIItems extends Component {
           <div>
             <button className="cart-button flex-grow-0" onClick={() => {
               userBuy++;
-              onModify();
+              this.onAddToCart(item);
             }}>
               <img src={cart_icon} alt="" />
             </button>

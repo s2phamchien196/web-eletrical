@@ -1,0 +1,21 @@
+.login {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.login input {
+  margin-bottom: 20px;
+  height: 45px;
+}
+
+.login-login {
+  width: 125px;
+}
+
+.login-sign button {
+  padding: 0;
+}

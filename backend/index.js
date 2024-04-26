@@ -148,11 +148,15 @@ app.get("/product", async (req, res) => {
 
 const Users = mongoose.model('Users', {
   username: {
-    type: String
+    type: String,
+    unique: true
   },
   mobile: {
     type: String,
     unique: true
+  },
+  email: {
+    type: String
   },
   password: {
     type: String,
@@ -163,6 +167,10 @@ const Users = mongoose.model('Users', {
   date: {
     type: Date,
     default: Date.now
+  },
+  items: {
+    type: Array,
+    default: [],
   }
 });
 
@@ -174,15 +182,19 @@ app.post('/signup', async (req, res) => {
     return res.status(400).json({ success: false, errors: "Existing user found with same mobile" })
   }
 
-  let cart = {};
-  for (let i = 0; i < 300; i++) {
-    cart[i] = 0;
-  }
+  // let cart = {};
+  // for (let i = 0; i < 300; i++) {
+  //   cart[i] = 0;
+  // }
   const user = new Users({
-    name: req.body.username,
+    username: req.body.username,
     mobile: req.body.mobile,
+    email: req.body.email,
     password: req.body.password,
-    cartData: cart
+    cartData: {
+      count: 0,
+      totalCost: 0
+    }
   })
 
   await user.save();
@@ -194,7 +206,7 @@ app.post('/signup', async (req, res) => {
   }
 
   const token = jwt.sign(data, 'secret_ecom');
-  res.json({ success: true, token })
+  res.json({ success: true, body: token })
 })
 
 app.post('/login', async (req, res) => {
@@ -208,7 +220,7 @@ app.post('/login', async (req, res) => {
         }
       }
       const token = jwt.sign(data, 'secret_ecom');
-      res.json({ success: true, token })
+      res.json({ success: true, body: token })
     } else {
       res.json({ success: false, errors: "Wrong password!!!" });
     }
@@ -328,5 +340,56 @@ app.get("/info", async (req, res) => {
   let menus = await ShopInfo.find({});
   res.send(menus[0]);
 })
+
+const fetchUser = async (req, res, next) => {
+  const token = req.header('auth-token');
+  if (!token) {
+    res.status(401).send({ errors: 'Please authenticate using validate' });
+  } else {
+    try {
+      const data = jwt.verify(token, 'secret_ecom');
+      req.user = data.user
+      next();
+    } catch (error) {
+      res.status(401).send({ errors: 'Please authenticate using validate' });
+    }
+  }
+}
+
+app.get("/userinfo/token", async (req, res) => {
+  const token = req.header('auth-token');
+  if (!token) {
+    res.status(401).send({ errors: 'Please authenticate using validate' });
+  } else {
+    try {
+      const data = jwt.verify(token, 'secret_ecom');
+      let id = data.user.id;
+      let user = await Users.findById(id);
+      if (user) {
+        res.send(user);
+      } else {
+        res.status(401).send({ errors: 'Please authenticate using validate' });
+      }
+    } catch (error) {
+      res.status(401).send({ errors: 'Please authenticate using validate' });
+    }
+  }
+})
+
+app.post("/addtocart", fetchUser, async (req, res) => {
+  let id = req.user.id;
+  let productId = req.body.productId
+  let user = await Users.findById(id);
+  let product = await Product.findById(productId);
+  if (!user.cartData[productId]) {
+    user.cartData[productId] = 1;
+  } else {
+    user.cartData[productId] += 1;
+  }
+  user.cartData['count']++;
+  user.cartData['totalCost'] += product['retail_price']
+  await Users.findByIdAndUpdate({ _id: user['_id'] }, { cartData: user.cartData });
+  res.send({ body: user });
+});
 
 

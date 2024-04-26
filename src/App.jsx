@@ -13,20 +13,24 @@ import { UIStore } from "./Pages/Store";
 import Navbar from "./AdminComponent/Navbar/Navbar";
 import Admin from "./Pages/Admin/Admin";
 import { UILogin } from "./AdminComponent/Login/Login";
-
-const renderRoutePolicy = () => {
-  let policyContents = [];
-  for (let key in policies) {
-    let policy = policies[key];
-    policyContents.push(
-      <Route path={policy.path} element={<UIPolicy policy={policy} />}></Route>
-    )
-  }
-  return policyContents;
-}
+import { severGET } from './Components/AppContext'
 
 export class App extends Component {
+  user = null;
+  constructor(props) {
+    super(props);
+    this.onRegister();
+  }
+
+  onRegister = () => {
+    severGET('/userinfo/token', {}, (bean) => {
+      this.user = bean;
+      this.forceUpdate();
+    })
+  }
+
   render() {
+    if (!this.user) return;
     const currentURL = window.location.href;
     let checkAdmin = currentURL.includes('admin') ? true : false;
     return (
@@ -35,13 +39,16 @@ export class App extends Component {
           {!checkAdmin ?
             <div>
               <BrowserRouter>
-                <NavbarComponent />
+                <NavbarComponent user={this.user} />
                 <div className="main">
                   <Routes>
                     <Route path='/' element={<UIHomePage onModify={() => this.forceUpdate()} />}></Route>
-                    {/* {renderRoutePolicy()} */}
-                    <Route path='/cua-hang' element={<UIStore onModify={() => this.forceUpdate()} />}>
-                      <Route path=':search' element={<UIStore onModify={() => this.forceUpdate()} />} />
+                    <Route path='/cua-hang' element={<UIStore onAddToCart={(item) => {
+                      this.onRegister();
+                    }} />}>
+                      <Route path=':search' element={<UIStore onAddToCart={(item) => {
+                        this.onRegister();
+                      }} />} />
                     </Route>
                     <Route path='/product' element={<UIProduct />}>
                       <Route path=':productId' element={<UIProduct />} />
