@@ -20,6 +20,7 @@ export class App extends Component {
     super(props);
     severGET('/info', {}, (bean) => {
       setInfo(bean);
+      this.forceUpdate();
     })
     this.onRegister();
   }
