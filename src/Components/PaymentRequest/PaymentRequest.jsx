@@ -1,11 +1,45 @@
 import React, { Component } from "react";
 import './PaymentRequest.css'
 import { Link, useLocation } from 'react-router-dom';
+import { getUser, severPOST, setUser } from "../AppContext"
+import Cookies from 'js-cookie'
+import { showNotification } from "../../Lib/input";
 
 class UIPaymentRequest extends Component {
   bean = {
     payment: 'cash'
   };
+
+  onUpdateToCart = (product, quantity) => {
+    let { onModify } = this.props;
+    let user = getUser()
+    if (user['_id']) {
+      severPOST('/updatetocart', { productId: product['_id'], quantity: quantity }, (bean) => {
+        setUser(bean);
+        if (onModify) onModify(bean);
+      })
+    } else {
+      user['cartData'][product['_id']] = quantity;
+      let totalQuantity = 0;
+      for (let key in user['cartData']) {
+        totalQuantity += user['cartData'][key];
+      }
+      user['total_quantity'] = totalQuantity;
+      const jsonUser = JSON.stringify(user);
+      Cookies.set('user', jsonUser, 365);
+      setUser(user);
+      if (onModify) onModify(user);
+    }
+  }
+
+  onRemoveAll = () => {
+    let { groups } = this.props;
+    groups.forEach(sel => {
+      this.onUpdateToCart(sel['product'], 0);
+      showNotification('Đơn hàng đã được xác nhận', 'success');
+    });
+  }
+
   changeHandler = (e) => {
     this.bean[e.target.name] = e.target.value;
     this.forceUpdate();
@@ -118,7 +152,7 @@ class UIPaymentRequest extends Component {
               </div>
             </div>
             <Link to='/payment-request/order-received' state={{ groups: groups, totalPayment: totalPayment, payment: this.bean.payment }}>
-              <button className="btn btn-warning btn-lg my-3">ĐẶT HÀNG</button>
+              <button className="btn btn-warning btn-lg my-3" onClick={this.onRemoveAll}>ĐẶT HÀNG</button>
             </Link>
             <div>
               Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng, tăng trải nghiệm sử dụng website, và cho các mục đích cụ thể khác đã được mô tả trong chính sách riêng tư của chúng tôi.
@@ -130,9 +164,10 @@ class UIPaymentRequest extends Component {
   }
 }
 
-export const PaymentRequest = () => {
+export const PaymentRequest = (props) => {
+  const { onModify } = props
   const { state } = useLocation();
   return (
-    <UIPaymentRequest groups={state.groups} totalPayment={state.totalPayment} />
+    <UIPaymentRequest groups={state.groups} totalPayment={state.totalPayment} onModify={onModify} />
   )
 }

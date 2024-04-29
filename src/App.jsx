@@ -20,6 +20,8 @@ import { PaymentRequest } from "./Components/PaymentRequest/PaymentRequest";
 import { PaymentRequestDetail } from "./Components/PaymentRequestDetail/PaymentRequestDetail";
 
 export class App extends Component {
+  uikey = nextKey();
+
   constructor(props) {
     super(props);
     severGET('/info', {}, (bean) => {
@@ -44,10 +46,10 @@ export class App extends Component {
       <div className="App body flex-vbox">
         <div className='flex-grow-1'>
           {!checkAdmin ?
-            <div>
+            <div className="flex-vbox">
               <BrowserRouter>
-                <NavbarComponent user={getUser()} />
-                <div className="main">
+                <NavbarComponent className={'flex-grow-0'} key={`nav-${this.uikey}`} user={getUser()} />
+                <div className="main flex-grow-1">
                   <Routes>
                     <Route path='/' element={<UIHomePage onModify={() => this.forceUpdate()} />}></Route>
                     <Route path='/cua-hang' element={<UIStore onAddToCart={(item) => {
@@ -62,7 +64,10 @@ export class App extends Component {
                     </Route>
                     <Route path='/login' element={<UILogin onModify={() => this.forceUpdate()} />}></Route>
                     <Route path='/cart' element={<UICart key={`cart-${nextKey()}`} onModify={() => this.forceUpdate()} />}></Route>
-                    <Route path='/payment-request' element={<PaymentRequest />}></Route>
+                    <Route path='/payment-request' element={<PaymentRequest onModify={() => {
+                      this.uikey = nextKey();
+                      this.forceUpdate();
+                    }} />}></Route>
                     <Route path='/payment-request/order-received' element={<PaymentRequestDetail />}></Route>
                   </Routes>
                 </div>

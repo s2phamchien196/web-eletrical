@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { showNotification } from "../../Lib/input";
 
 export class UICart extends Component {
+  loading = true;
   uiKey = nextKey();
   groups = [];
   bean = {
@@ -19,6 +20,7 @@ export class UICart extends Component {
   constructor(props) {
     super(props);
     this.updateData();
+    this.loading = false;
   }
 
   updateData = () => {
@@ -39,8 +41,6 @@ export class UICart extends Component {
   }
 
   onUpdateToCart = (product, quantity) => {
-    console.log(product);
-    console.log(quantity);
     let { onModify } = this.props;
     let user = getUser()
     if (user['_id']) {
@@ -116,6 +116,20 @@ export class UICart extends Component {
 
 
   render() {
+    if (this.loading) return;
+    let checked = this.groups.find(sel => sel.total != 0);
+    if (!checked) {
+      return (
+        <div className="flex-vbox" style={{ height: '25vh ' }}>
+          <div>
+            Chưa có sản phẩm nào trong giỏ hàng.
+          </div>
+          <Link to='/cua-hang'>
+            <button className="btn btn-info btn-lg">QUAY TRỞ LẠI CỬA HÀNG</button>
+          </Link>
+        </div>
+      )
+    }
     return (
       <div className="cart">
         <div className="cart-left">
