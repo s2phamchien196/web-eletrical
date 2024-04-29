@@ -64,12 +64,12 @@ export class UIHomePage extends Component {
           </div>
           <div className="flex-hbox  align-items-center">
             <FeatherIcon.Phone className="m-2" size={18} />
-            <a className="text-primary px-1" href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">{info.mobile}</a>/
-            <a className="text-primary px-1" href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">Zalo:{info.zalo}</a>
+            <a className="text-primary px-1" href={`tel: ${info.mobile}`} target="_blank" rel="noopener noreferrer">{info.mobile}</a>/
+            <a className="text-primary px-1" href={`https://zalo.me/${info.zalo}`} target="_blank" rel="noopener noreferrer">Zalo:{info.zalo}</a>
           </div>
           <div className="flex-hbox align-items-center" style={{ alignItems: 'center' }}>
             <FeatherIcon.Mail className="mx-1" size={18} />
-            <a className="text-primary px-1" href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">{info.email}</a>
+            <a className="text-primary px-1" href={`mailto:${info.email}`} target="_blank" rel="noopener noreferrer">{info.email}</a>
             |<FeatherIcon.Globe className="m-2" size={18} />
             <a className="text-primary" href={info.website} target="_blank" rel="noopener noreferrer">{info.website}</a>
           </div>

@@ -7,7 +7,7 @@ import whatsapp_icon from '../Assets/whatsapp_icon.png';
 import './Navbar.css';
 import { Link } from "react-router-dom";
 import List from "./List";
-import { severGET, setUser, getUser } from '../AppContext'
+import { severGET, setUser, getUser, getInfo } from '../AppContext'
 import { showDialog } from "../../Lib/input";
 import { UILogin } from "../Login/Login";
 import Cookies from "js-cookie";
@@ -34,6 +34,7 @@ export class NavbarComponent extends Component {
   }
 
   render() {
+    let info = getInfo();
     let user = getUser();
     if (!this.infoData) return;
     const handleChange = (event) => {
@@ -104,12 +105,12 @@ export class NavbarComponent extends Component {
         </div>
         <div className="menu-contact-zf">
           <div className="zalo-pulse">
-            <a href={`https://zalo.me/0818920428`} className="zalo-shake" style={{ cursor: 'pointer' }}>
+            <a href={`https://zalo.me/${info.zalo}`} className="zalo-shake" style={{ cursor: 'pointer' }}>
               <img src={zalo} alt="" />
             </a>
           </div>
           <div className="phone-pulse">
-            <a href={`tel:0818920428`} className="phone-shake" style={{ cursor: 'pointer' }}>
+            <a href={`tel:${info.mobile}`} className="phone-shake" style={{ cursor: 'pointer' }}>
               <img src={phone} alt="" />
             </a>
           </div>

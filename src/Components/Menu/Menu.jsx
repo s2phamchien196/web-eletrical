@@ -96,10 +96,10 @@ export class Menu extends Component {
   render() {
     let { onAddToCart, filter } = this.props;
     let h = 56;
-    let height = this.allMenus.length * h;
-    for (let sel of this.allMenus) {
-      if (sel['collapse']) height += (sel['items'].length * h);
-    }
+    // let height = this.allMenus.length * h;
+    // for (let sel of this.allMenus) {
+    //   if (sel['collapse']) height += (sel['items'].length * h);
+    // }
     if (this.filterProducts.length == 0) return;
     return (
       <div className='flex-vbox'>
@@ -117,14 +117,16 @@ export class Menu extends Component {
           }
         </div>
         <div className='flex-hbox'>
-          <div className='menu flex-grow-0' style={{ height: height }}>
-            <div className='menu-header'>
-              Danh Mục Sản Phẩm
-            </div>
-            <ul className='menu-items'>
-              {this.onRenderLi()}
-            </ul>
-          </div >
+          <div className='flex-vbox'>
+            <div className='menu flex-grow-0'>
+              <div className='menu-header'>
+                Danh Mục Sản Phẩm
+              </div>
+              <ul className='menu-items'>
+                {this.onRenderLi()}
+              </ul>
+            </div >
+          </div>
           <div className='flex-grow-1'>
             <Popular key={`popular-${this.uikey}`} products={this.filterProducts} filter={filter} menuName={this.selected} onAddToCart={onAddToCart} />
           </div>
