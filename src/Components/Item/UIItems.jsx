@@ -3,8 +3,8 @@ import './Item.css'
 import cart_icon from '../Assets/cart_icon.png'
 import { Link } from "react-router-dom";
 import { host, severPOST, getUser } from "../AppContext";
-import { showNotification, showDialog } from "../../Lib/input";
-import { UILogin } from "../Login/Login";
+import { showNotification } from "../../Lib/input";
+import Cookies from 'js-cookie'
 
 
 export class UIItems extends Component {
@@ -12,14 +12,31 @@ export class UIItems extends Component {
     let { onAddToCart } = this.props;
     let user = getUser();
     if (!user['_id']) {
-      showDialog('login', 'Đăng Nhập', <UILogin onPostCommit={this.onRegister} />);
+      if (!user['cartData'][item['_id']]) {
+        user['cartData'][item['_id']] = 1;
+      } else {
+        user['cartData'][item['_id']] += 1;
+      }
+      user['notification'] = item['label'];
+      let totalQuantity = 0;
+      for (let key in user['cartData']) {
+        totalQuantity += user['cartData'][key];
+      }
+      user['total_quantity'] = totalQuantity;
+
+      let totalPrices = user['total_prices'] ? user['total_prices'] : 0;
+      totalPrices += item['retail_price'];
+      user['total_prices'] = totalPrices;
+      const jsonUser = JSON.stringify(user);
+      Cookies.set('user', jsonUser, 365);
+      if (onAddToCart) onAddToCart(item);
     } else {
-      severPOST('/addtocart', { productId: item['_id'] }, (bean) => {
-        showNotification('Add Product Success', 'success')
+      severPOST('/addtocart', { productId: item['_id'], quantity: 1 }, (bean) => {
         if (onAddToCart) onAddToCart(item);
         this.forceUpdate();
       })
     }
+    showNotification(`"${item['label']}" đã được thêm vào giỏ hàng.`, 'success');
   }
 
   render() {
@@ -28,7 +45,7 @@ export class UIItems extends Component {
     price = Math.round(price);
     let userBuy = 0;
     let user = getUser();
-    let cartData = user.cartData;
+    let cartData = user.cartData ? user.cartData : {};
     let productTotalItems = cartData[item['_id']] ? cartData[item['_id']] : 0;
     return (
       <div className={'item'}>
@@ -52,7 +69,7 @@ export class UIItems extends Component {
               }
             </div>
           </div>
-          <div>
+          <div className="flex-vbox justify-content-center align-items-end">
             <button className="cart-button flex-grow-0" data-toggle="modal" data-target="#login" onClick={() => {
               userBuy++;
               this.onAddToCart(item);

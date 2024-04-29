@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import logo from '../Assets/logo.png';
 import cart_icon from '../Assets/cart_icon.png';
+import phone from '../Assets/phone.png';
+import zalo from '../Assets/zalo.png';
 import whatsapp_icon from '../Assets/whatsapp_icon.png';
 import './Navbar.css';
 import { Link } from "react-router-dom";
@@ -8,6 +10,7 @@ import List from "./List";
 import { severGET, setUser, getUser } from '../AppContext'
 import { showDialog } from "../../Lib/input";
 import { UILogin } from "../Login/Login";
+import Cookies from "js-cookie";
 
 export class NavbarComponent extends Component {
   param = {
@@ -43,7 +46,7 @@ export class NavbarComponent extends Component {
         window.location.href = `/cua-hang/${this.param.search}`;
       }
     };
-    let buy = user['_id'] ? user.cartData['count'] : 0;
+    let quantity = user['total_quantity'] ? user['total_quantity'] : 0;
     return (
       <div className="nav-header">
         <div className="navbar-main">
@@ -74,6 +77,7 @@ export class NavbarComponent extends Component {
                     {user.username}
                   </button> /
                   <button type="button" className="btn btn-link btn-md" onClick={() => {
+                    Cookies.set('user', '', 0);
                     localStorage.removeItem('auth-token');
                     user = null;
                     window.location.reload();
@@ -92,10 +96,22 @@ export class NavbarComponent extends Component {
                 <Link to={'/cart'}>
                   <img src={cart_icon} alt="" style={{ height: 30 }} />
                 </Link>
-                <div className="nav-cart-count">{buy}</div>
+                <div className="nav-cart-count">{quantity}</div>
               </div>
             </div >
             <List />
+          </div>
+        </div>
+        <div className="menu-contact-zf">
+          <div className="zalo-pulse">
+            <a href={`https://zalo.me/0818920428`} className="zalo-shake" style={{ cursor: 'pointer' }}>
+              <img src={zalo} alt="" />
+            </a>
+          </div>
+          <div className="phone-pulse">
+            <a href={`tel:0818920428`} className="phone-shake" style={{ cursor: 'pointer' }}>
+              <img src={phone} alt="" />
+            </a>
           </div>
         </div>
       </div>

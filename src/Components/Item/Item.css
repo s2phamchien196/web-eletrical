@@ -66,6 +66,9 @@
 }
 
 .cart-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -105,7 +108,7 @@
   justify-content: center;
   align-items: center;
   margin-left: -30px;
-  margin-top: -5px;
+  margin-top: 5px;
   margin-right: 10px;
   border-radius: 11px;
   font-size: 14px;

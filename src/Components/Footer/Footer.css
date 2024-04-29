@@ -9,7 +9,32 @@
   background-color: rgb(102, 102, 102);
   gap: 30px;
   color: antiquewhite;
-  margin-top: 20px;
   font-weight: 400;
   font-size: 18px;
+}
+
+.footer-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: rgba(102, 102, 102, 0.533);
+  height: 100px;
+}
+
+.footer-brand-img {
+  display: flex;
+  width: 80px;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  height: 80px;
+}
+
+.footer-brand-img img {
+  width: 60px;
+  margin-top: auto;
+  margin-bottom: auto;
 }

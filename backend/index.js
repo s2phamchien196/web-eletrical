@@ -164,6 +164,12 @@ const Users = mongoose.model('Users', {
   cartData: {
     type: Object,
   },
+  total_quantity: {
+    type: Number,
+  },
+  total_prices: {
+    type: Number,
+  },
   date: {
     type: Date,
     default: Date.now
@@ -182,19 +188,16 @@ app.post('/signup', async (req, res) => {
     return res.status(400).json({ success: false, errors: "Existing user found with same mobile" })
   }
 
-  // let cart = {};
-  // for (let i = 0; i < 300; i++) {
-  //   cart[i] = 0;
-  // }
   const user = new Users({
     username: req.body.username,
     mobile: req.body.mobile,
     email: req.body.email,
     password: req.body.password,
     cartData: {
-      count: 0,
-      totalCost: 0
-    }
+      0: 0
+    },
+    total_quantity: 0,
+    total_prices: 0,
   })
 
   await user.save();
@@ -378,17 +381,41 @@ app.get("/userinfo/token", async (req, res) => {
 
 app.post("/addtocart", fetchUser, async (req, res) => {
   let id = req.user.id;
-  let productId = req.body.productId
+  let productId = req.body.productId;
+  let quantity = req.body.quantity;
   let user = await Users.findById(id);
-  let product = await Product.findById(productId);
   if (!user.cartData[productId]) {
-    user.cartData[productId] = 1;
+    user.cartData[productId] = quantity;
   } else {
-    user.cartData[productId] += 1;
+    user.cartData[productId] += quantity;
   }
-  user.cartData['count']++;
-  user.cartData['totalCost'] += product['retail_price']
-  await Users.findByIdAndUpdate({ _id: user['_id'] }, { cartData: user.cartData });
+
+  user['total_quantity'] = 0;
+  user['total_prices'] = 0;
+  for (let key in user.cartData) {
+    user['total_quantity'] += user.cartData[key];
+    let product = await Product.findById(productId);
+    user['total_prices'] += (product['retail_price'] * user.cartData[key]);
+  }
+  await Users.findByIdAndUpdate({ _id: user['_id'] }, { cartData: user.cartData, total_quantity: user.total_quantity, total_prices: user.total_prices });
+  res.send({ body: user });
+});
+
+app.post("/updatetocart", fetchUser, async (req, res) => {
+  let id = req.user.id;
+  let productId = req.body.productId;
+  let quantity = req.body.quantity;
+  let user = await Users.findById(id);
+  user.cartData[productId] = quantity;
+
+  user['total_quantity'] = 0;
+  user['total_prices'] = 0;
+  for (let key in user.cartData) {
+    user['total_quantity'] += user.cartData[key];
+    let product = await Product.findById(productId);
+    user['total_prices'] += (product['retail_price'] * user.cartData[key]);
+  }
+  await Users.findByIdAndUpdate({ _id: user['_id'] }, { cartData: user.cartData, total_quantity: user.total_quantity, total_prices: user.total_prices });
   res.send({ body: user });
 });
 

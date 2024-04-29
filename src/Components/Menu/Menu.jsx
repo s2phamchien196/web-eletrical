@@ -34,8 +34,8 @@ export class Menu extends Component {
     })
   }
 
-  onChange = (sel, collapse) => {
-    sel['collapse'] = collapse;
+  onChange = (sel) => {
+    sel['collapse'] = !sel['collapse'];
     this.forceUpdate();
   }
 
@@ -70,6 +70,8 @@ export class Menu extends Component {
       let filter = this.products.filter(p => p.menu_name === sel.name);
       let count = filter ? filter.length : 0;
 
+      let transform = collapse ? 'rotate(180deg)' : 'rotate(0deg)'
+
       menus.push(
         <li key={`menu-${i}`} className='flex-vbox' style={{ cursor: 'pointer' }}>
           <div className='flex-hbox'>
@@ -77,11 +79,7 @@ export class Menu extends Component {
               {sel.name}
             </div>
             <span className='menu-count'>({count})</span>
-            {collapse ?
-              <FeatherIcon.ChevronUp size={20} style={{ margin: 'auto' }} onClick={() => this.onChange(sel, false)} />
-              :
-              <FeatherIcon.ChevronDown size={20} style={{ margin: 'auto' }} onClick={() => this.onChange(sel, true)} />
-            }
+            <FeatherIcon.ChevronUp size={20} className='menu-icon' style={{ margin: 'auto', transform: transform }} onClick={() => this.onChange(sel)} />
           </div>
           {collapse ?
             <ul className='menu-items my-1'>

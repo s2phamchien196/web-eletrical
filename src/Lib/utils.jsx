@@ -5,3 +5,10 @@ export const scrollUpHeader = () => {
     behavior: 'smooth'
   });
 }
+
+let uiKey = 0;
+
+export const nextKey = () => {
+  uiKey++;
+  return uiKey;
+}

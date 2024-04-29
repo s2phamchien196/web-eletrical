@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { getApiURL } from "../env";
 export const host = getApiURL();
 export let user = {};
@@ -12,6 +13,10 @@ export const setInfo = (infoDb) => {
 }
 
 export const getUser = () => {
+  if (!user['_id']) {
+    let userCookie = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : { cartData: {} };
+    return userCookie;
+  }
   return user;
 }
 
@@ -54,6 +59,22 @@ export const severPOST = async (url, body, callBack) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       'auth-token': authToken,
+    },
+    body: JSON.stringify(body)
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      callBack(data.body);
+    })
+};
+
+
+export const severAuthentication = async (url, body, callBack) => {
+  await fetch(host + url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(body)
   })

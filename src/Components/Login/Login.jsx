@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import './Login.css'
-import { severPOST } from '../AppContext'
+import { severAuthentication } from '../AppContext'
+import Cookies from "js-cookie";
+import { showNotification } from "../../Lib/input";
 
 export class UILogin extends Component {
+  login = true;
   mode = 'login';
   users = {
     username: '',
@@ -14,28 +17,43 @@ export class UILogin extends Component {
 
   onSignUp = () => {
     let { onPostCommit } = this.props;
-    severPOST('/signup', this.users, (bean) => {
+    severAuthentication('/signup', this.users, (bean) => {
+      if (!bean) return;
+      Cookies.set('user', '', 0);
       const jsonData = JSON.stringify(bean);
       localStorage.setItem("auth-token", jsonData);
       this.mode = 'login';
       if (onPostCommit) onPostCommit(bean);
       window.location.reload();
-    })
+    });
   }
 
   onLogin = () => {
     let { onPostCommit } = this.props;
-    severPOST('/login', this.users, (bean) => {
-      const jsonData = JSON.stringify(bean);
-      localStorage.setItem("auth-token", jsonData);
-      if (onPostCommit) onPostCommit(bean);
-      window.location.reload();
+    severAuthentication('/login', this.users, (bean) => {
+      if (!bean) {
+        this.login = false;
+        this.forceUpdate();
+      } else {
+        Cookies.set('user', '', 0);
+        const jsonData = JSON.stringify(bean);
+        localStorage.setItem("auth-token", jsonData);
+        if (onPostCommit) onPostCommit(bean);
+        window.location.reload();
+      }
     })
   }
 
   render() {
     return (
       <div>
+        {!this.login ?
+          <div className="text-danger">
+            {'Tài Khoản, Mật Khẩu chưa chính xác!!!'}
+          </div>
+          :
+          <div></div>
+        }
         {this.mode === 'login' ?
           <div className="login">
             <div>Tài Khoản</div>

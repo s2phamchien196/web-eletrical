@@ -14,6 +14,10 @@ import Navbar from "./AdminComponent/Navbar/Navbar";
 import Admin from "./Pages/Admin/Admin";
 import { UILogin } from "./AdminComponent/Login/Login";
 import { severGET, setUser, getUser, setInfo } from './Components/AppContext'
+import { UICart } from "./Components/Cart/UICart";
+import { nextKey } from "./Lib/utils";
+import { PaymentRequest } from "./Components/PaymentRequest/PaymentRequest";
+import { PaymentRequestDetail } from "./Components/PaymentRequestDetail/PaymentRequestDetail";
 
 export class App extends Component {
   constructor(props) {
@@ -53,11 +57,13 @@ export class App extends Component {
                         this.onRegister();
                       }} />} />
                     </Route>
-                    <Route path='/product' element={<UIProduct />}>
-                      <Route path=':productId' element={<UIProduct />} />
+                    <Route path='/product' element={<UIProduct onModify={() => this.forceUpdate()} />}>
+                      <Route path=':productId' element={<UIProduct onModify={() => this.forceUpdate()} />} />
                     </Route>
                     <Route path='/login' element={<UILogin onModify={() => this.forceUpdate()} />}></Route>
-                    {/* <Route path='/cart' element={<UI onModify={() => this.forceUpdate()} />}></Route> */}
+                    <Route path='/cart' element={<UICart key={`cart-${nextKey()}`} onModify={() => this.forceUpdate()} />}></Route>
+                    <Route path='/payment-request' element={<PaymentRequest />}></Route>
+                    <Route path='/payment-request/order-received' element={<PaymentRequestDetail />}></Route>
                   </Routes>
                 </div>
               </BrowserRouter>
