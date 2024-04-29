@@ -33,7 +33,9 @@ export class UILogin extends Component {
     severAuthentication('/login', this.users, (bean) => {
       if (!bean) {
         this.login = false;
+        showNotification('Login Fail, Tài Khoản, Mật Khẩu chưa chính xác!!!', 'danger')
         this.forceUpdate();
+        return;
       } else {
         Cookies.set('user', '', 0);
         const jsonData = JSON.stringify(bean);
