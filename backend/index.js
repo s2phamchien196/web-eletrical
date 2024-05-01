@@ -213,7 +213,7 @@ app.post('/signup', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
-  let user = await Users.findOne({ mobile: req.body.mobile });
+  let user = await Users.findOne({ username: req.body.username });
   if (user) {
     const passCompare = req.body.password === user.password;
     if (passCompare) {
