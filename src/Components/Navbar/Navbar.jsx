@@ -6,7 +6,7 @@ import zalo from '../Assets/zalo.png';
 import whatsapp_icon from '../Assets/whatsapp_icon.png';
 import './Navbar.css';
 import { Link } from "react-router-dom";
-import List from "./List";
+import List, { OffCanvasList } from "./List";
 import { severGET, setUser, getUser, getInfo } from '../AppContext'
 import { showDialog } from "../../Lib/input";
 import { UILogin } from "../Login/Login";
@@ -53,25 +53,33 @@ export class NavbarComponent extends Component {
         <div className="navbar-main">
           <div className="flex-vbox header">
             <div className={"nav-banner"}>
+              {window.innerWidth < 768 ?
+                <OffCanvasList /> : null
+              }
               <div className="flex-hbox">
                 <img src={logo} style={{ width: 80, height: 80 }} alt="" />
               </div>
-              <div className='text-start'>
-                <input
-                  type="search" className="search flex-grow-1" value={this.param.search}
-                  onChange={handleChange}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Tìm sản phẩm ...">
-                </input>
-              </div>
-              <div className="flex-vbox flex-grow-0 text-start" style={{ color: 'white', fontWeight: 600 }}>
-                <span>{'Liên Hệ 24/7'}</span>
-                <div className="flex-hbox">
-                  <img className="my-2" style={{ height: 15, width: 15 }} src={whatsapp_icon} alt="" />
-                  <span className="px-1">{this.infoData.mobile}</span>/
-                  <span className="px-1">Zalo:{this.infoData.zalo}</span>
-                </div>
-              </div>
+              {window.innerWidth >= 768 ?
+                <>
+                  <div className='text-start'>
+                    <input
+                      type="search" className="search flex-grow-1" value={this.param.search}
+                      onChange={handleChange}
+                      onKeyDown={handleKeyDown}
+                      placeholder="Tìm sản phẩm ...">
+                    </input>
+                  </div>
+                  <div className="flex-vbox flex-grow-0 text-start" style={{ color: 'white', fontWeight: 600 }}>
+                    <span>{'Liên Hệ 24/7'}</span>
+                    <div className="flex-hbox">
+                      <img className="my-2" style={{ height: 15, width: 15 }} src={whatsapp_icon} alt="" />
+                      <span className="px-1">{this.infoData.mobile}</span>/
+                      <span className="px-1">Zalo:{this.infoData.zalo}</span>
+                    </div>
+                  </div>
+                </>
+                : null
+              }
               {user['_id'] ?
                 <div className="flex-hbox btn-userinfo">
                   <button type="button" className="btn btn-link btn-md">

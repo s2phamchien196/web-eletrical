@@ -7,7 +7,7 @@ import icontag from '../Assets/icon-tag.png'
 import { nextKey } from "../../Lib/utils";
 import Cookies from 'js-cookie'
 import { Link } from "react-router-dom";
-import { showNotification } from "../../Lib/input";
+import { showNotification, BBOffcanvas } from "../../Lib/input";
 
 export class UICart extends Component {
   loading = true;
@@ -132,6 +132,7 @@ export class UICart extends Component {
     }
     return (
       <div className="cart">
+        {/* {<BBOffcanvas />} */}
         <div className="cart-left">
           <div className="cart-column">
             <h4>SẢN PHẨM</h4>

@@ -2,6 +2,8 @@ import React, { Component, useEffect, useState } from "react";
 import * as FeatherIcon from "react-feather";
 import './style.css';
 import ReactDOM from 'react-dom';
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 export class BBMultiField extends Component {
   changeHandler = (e, index) => {
@@ -149,4 +151,63 @@ export class Dialog extends Component {
     )
   }
 
+}
+
+export class ButtonOffCanvas extends Component {
+  show = false;
+
+  handleClose = () => {
+    this.show = false;
+    this.forceUpdate();
+  };
+  handleShow = () => {
+    this.show = true;
+    this.forceUpdate();
+  };
+
+  render() {
+    return (
+      <>
+        <Button variant="primary" onClick={this.handleShow}>
+          Launch
+        </Button>
+
+        <Offcanvas show={this.show} onHide={this.handleClose}>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            Some text as placeholder. In real life you can have the elements you
+            have chosen. Like, text, images, lists, etc.
+          </Offcanvas.Body>
+        </Offcanvas>
+      </>
+    );
+  }
+}
+
+export function BBOffcanvas(props) {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  let { icon, label, html, header, color } = props;
+
+  return (
+    <>
+      <Button variant={color} onClick={handleShow}>
+        {icon}<span className="mx-1">{label}</span>
+      </Button>
+
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>{header}</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          {html}
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
+  );
 }
