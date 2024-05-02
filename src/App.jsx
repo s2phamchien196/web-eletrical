@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import './App.css';
+import { useLocation } from 'react-router-dom';
 
 import { UIFooter } from './Components/Footer/Footer';
-import policies from './Components/Assets/policies';
-import UIPolicy from './Pages/UIPolicy';
 import { NavbarComponent } from './Components/Navbar/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UIProduct } from './Pages/UIProduct';
@@ -19,7 +18,7 @@ import { nextKey } from "./Lib/utils";
 import { PaymentRequest } from "./Components/PaymentRequest/PaymentRequest";
 import { PaymentRequestDetail } from "./Components/PaymentRequestDetail/PaymentRequestDetail";
 
-export class App extends Component {
+export class UIApp extends Component {
   uikey = nextKey();
 
   constructor(props) {
@@ -48,6 +47,7 @@ export class App extends Component {
           {!checkAdmin ?
             <div className="flex-vbox">
               <BrowserRouter>
+                <ScrollToTop />
                 <NavbarComponent className={'flex-grow-0'} key={`nav-${this.uikey}`} user={getUser()} />
                 <div className="main flex-grow-1">
                   <Routes>
@@ -90,4 +90,13 @@ export class App extends Component {
   }
 }
 
-export default App;
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+  return null;
+};
